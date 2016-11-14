@@ -9,7 +9,7 @@ module.exports = {
 		'./src/index'
 	],
 	output: {
-		path: path.join(__dirname, 'build'),
+		path: path.join(__dirname),
 		filename: 'app.js'
 	},
 	plugins: [
@@ -41,12 +41,7 @@ module.exports = {
 						'es2015',
 						'stage-0'
 					],
-					cacheDirectory: true,
-					plugins: [
-						'transform-runtime',
-						'add-module-exports',
-						'transform-decorators-legacy'
-					]
+					cacheDirectory: true
 				}
 			},
 			{

@@ -3,11 +3,16 @@
 const Hapi = require('hapi');
 const path = require('path');
 const Inert = require('inert');
+const curl = require('curlrequest');
+const bodyParser = require('body-parser');
+const Joi = require('joi');
+const fetch = require('isomorphic-fetch');
+const isProd = process.env.NODE_ENV === 'production';
 
 const server = new Hapi.Server();
-server.connection({host: '0.0.0.0', port: 1995});
+server.connection({host: '0.0.0.0', port: isProd ? 1996 : 1995});
 
-const isProd = false;
+const index = !isProd ? './index.html' : './dist/index.html';
 const plugins = [];
 
 if (!isProd) {
@@ -41,6 +46,39 @@ server.register(Inert, () => {
 	});
 });
 
+const getData = (input) => {
+	const request = new Request('http://localhost:9200/norgerundt/_search', {
+		method: 'POST',
+		body: JSON.stringify({
+			query: {
+				query_string: {
+					query: input,
+					default_operator: "AND"
+				}
+			}
+		}),
+		headers: new Headers({
+			'Accept': 'application/json, text/plain, */*',
+			'Content-Type': 'application/json'
+		})
+	});
+
+	return fetch(request)
+		.then(res => res.json());
+};
+
+const searchHandler = function (request, reply) {
+	const input = request.payload.input;
+	reply(getData(input).then(res => res));
+};
+const searchConfig = {
+	handler: searchHandler,
+	validate: {
+		payload: {
+			input: Joi.string().min(1).required()
+		}
+	}
+};
 
 if (!module.parent) {
 	server.start((err) => {
@@ -56,13 +94,20 @@ if (!module.parent) {
 			}
 
 
-			server.route({
-				method: 'GET',
-				path: '/',
-				handler: function (request, reply) {
-					reply.file('./build/index.html');
+			server.route([
+				{
+					method: 'GET',
+					path: '/',
+					handler: function (request, reply) {
+						reply.file(index);
+					},
+				},
+				{
+					method: 'POST',
+					path: '/search',
+					config: searchConfig
 				}
-			});
+			]);
 
 		});
 

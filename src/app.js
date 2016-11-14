@@ -1,4 +1,4 @@
-const Svenjs = require('svenjs');
+const Svenjs = require("../svenjs/es5/index");
 const SearchBox = require('./searchbox');
 
 const todoMVCApp = Svenjs.create({
@@ -10,7 +10,7 @@ const todoMVCApp = Svenjs.create({
 	},
 
 	render(){
-		return (<section class="todoapp">
+		return (<section class="svenapp">
 			<SearchBox />
 		</section>);
 	}
