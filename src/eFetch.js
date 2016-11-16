@@ -1,4 +1,7 @@
 module.exports = function (input) {
+	if (input.length < 2) {
+		return Promise.resolve({hits: []});
+	}
 	const request = new Request('/search', {
 		method: 'POST',
 		body: JSON.stringify({

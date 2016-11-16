@@ -44,8 +44,15 @@ h3{
 	border-top: 1px solid #e6e6e6;
 }
 
+.search-form{
+	text-align: center;
+}
+
 input[type="text"] {
 	width: 80%;
+	padding: 10px;
+	font-size: 14px;
+	border-radius: 1px;
 }
 
 .footer {

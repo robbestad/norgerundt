@@ -1,16 +1,14 @@
-const Svenjs = require("../svenjs/es5/index");
-const App = require("./app");
+const SvenDOM = require('../svenjs/packages/svenjs/dist/svenjs-dom');
 const rootNode = document.getElementById('myapp');
-Svenjs.render(
-	App,
-	rootNode
-);
+const app = require('./app');
+const {mount, dispose} = require('./render');
+mount();
 
 if (module.hot) {
 	module.hot.accept(() => {
-		Svenjs.render(
-			App,
-			rootNode
-		);
-	})
+		mount();
+	});
+	module.hot.dispose((data) => {
+		dispose();
+	});
 }

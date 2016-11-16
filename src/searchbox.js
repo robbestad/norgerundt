@@ -1,57 +1,68 @@
-// const Svenjs = require("svenjs");
-const Svenjs = require("../svenjs/es5/index");
+const Component = require('../svenjs/packages/svenjs/dist/svenjs-component');
+const t = require('../svenjs/packages/svenjs/dist/svenjs-create-element');
 const eFetch = require('./eFetch');
 
-module.exports = Svenjs.create({
-	initialState: {
-		searchVal: '',
-		hits: []
-	},
-	render() {
-		const clickFunc = (data) => {
-			let clicks = this.state.clicks;
-			this.setState({
-				searchVal: data[0].value
-			});
-			eFetch(data[0].value)
-				.then(data => {
-					console.log('data.hits.hits', data.hits.hits);
-
-					this.setState({
-						...this.state,
-						hits: data.hits.hits
-					})
-				});
-
+class SearchBox extends Component {
+	constructor() {
+		super();
+		this.state = {
+			searchVal: '',
+			hits: []
 		};
-
-		const {hits, searchVal} = this.state;
-
-		// hits && hits.map(hit=>console.log('hit', hit._source.tittel))
-
-		return (<div id="row">
-			<div id="app">
-				<h3>Søk i Norge Rundt</h3>
-				<form onSubmit={e => {
-					e.preventDefault();
-					clickFunc.call(this, e.target);
-				}}>
-					<input type="text" placeHolder="Søk etter noe" value={searchVal ? searchVal : ''}/>
-					<input type="submit" class="button" value="Søk"/>
-				</form>
-			</div>
-			<ul id="hits">
-				{hits && hits.map(hit=> {
-					return (<li class="infoblock">
-						<span class="infohead">{hit._source.tittel} ({hit._source.year})</span>
-						{!hit._source.alder ? '' : <span class="infoline">Alder: {hit._source.alder}</span>}
-						{!hit._source.antall_kvinner ? '' : <span class="infoline">Antall kvinner: {hit._source.antall_kvinner}</span>}
-						{!hit._source.antall_menn ? '' : <span class="infoline">Antall menn: {hit._source.antall_menn}</span>}
-						{!hit._source.antrekk ? '' : <span class="infoline">Antrekk: {hit._source.antrekk}</span>}
-						<a target="_blank" class="subdued" href={hit._source.url}>Se video</a></li>)
-				})}
-			</ul>
-
-		</div>)
+		this.handleChange = this.handleChange.bind(this);
 	}
-});
+
+
+	handleChange(e) {
+		const val = e.target.value.trimLeft();
+		this.setState({
+			searchVal: val
+		});
+		eFetch(val)
+			.then(data => {
+				try {
+					const hits = data.hits.hits;
+					this.setState({
+						hits
+					})
+				} catch (e) {
+					console.error('e', e);
+				}
+			});
+	}
+
+	render() {
+		const {hits, searchVal} = this.state;
+		return t('div', {class: 'row'},
+			t('div', {class: 'app'},
+				t('h3', null, 'Søk i Norge Rundt'),
+				t('form', {class: 'search-form'},
+					t('input', {
+						class: 'inputfield',
+						placeHolder: 'Søk...',
+						type: 'text',
+						value: searchVal ? searchVal : '',
+						onKeyUp: this.handleChange
+					})
+				),
+				t('ul', {id: 'hits'},
+					hits && hits.map(hit=> {
+						return (t('li', {
+								class: 'infoblock'
+							},
+							t('div', {class: 'infohead'}, `${hit._source.tittel} (${hit._source.year})`),
+							hit._source.alder && t('div', null, `Personalder: ${hit._source.alder}`),
+							hit._source.antall_kvinner && t('div', null, `Kvinner: ${hit._source.antall_kvinner}`),
+							hit._source.antall_menn && t('div', null, `Menn: ${hit._source.antall_menn}`),
+							hit._source.antrekk && t('div', null, `Antrekk: ${hit._source.antrekk}`),
+							t('div', null,
+								t('a', {target: '_blank', class: 'subdued', href: hit._source.url}, 'Se video')
+							),
+						));
+					})
+				)
+			)
+		)
+	}
+}
+module.exports = t(SearchBox);

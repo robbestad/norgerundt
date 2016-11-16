@@ -62,7 +62,7 @@ var config = {
 	extensions: ['', '.js']
 };
 if (process.env.NODE_ENV !== 'production') {
-	config.devtool = 'sourcemap';
+	config.devtool = 'eval';
 	config.output = {
 		publicPath: '/',
 		path: path.join(__dirname, '..'),

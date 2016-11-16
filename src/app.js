@@ -1,19 +1,12 @@
-const Svenjs = require("../svenjs/es5/index");
-const SearchBox = require('./searchbox');
+const Component = require('../svenjs/packages/svenjs/dist/svenjs-component');
+const t = require('../svenjs/packages/svenjs/dist/svenjs-create-element');
+const searchBox = require('./searchbox');
 
-const todoMVCApp = Svenjs.create({
-	displayName: "Norge Rundt",
-	initialState: {},
-	_didUpdate(){
-	},
-	_didMount(){
-	},
-
-	render(){
-		return (<section class="svenapp">
-			<SearchBox />
-		</section>);
+class App extends Component {
+	render() {
+		return t('div', {class: 'svenapp'},
+			searchBox
+		)
 	}
-
-});
-module.exports = todoMVCApp;
+}
+module.exports = t(App);
