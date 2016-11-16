@@ -49,48 +49,45 @@ server.register(Inert, () => {
 });
 
 const getData = (input) => {
-		let request;
-		if (isProd) {
-			// request = new Request('http://57e71220df27cc6ca6912bfb750b0c4b.eu-west-1.aws.found.io:9200/norgerundt/_search', {
-			request = new Request('https://57e71220df27cc6ca6912bfb750b0c4b.eu-west-1.aws.found.io:9243/norgerundt/_search', {
-				method: 'POST',
-				body: JSON.stringify({
-					query: {
-						query_string: {
-							query: input,
-							default_operator: "AND"
-						}
-					}
-				}),
-				headers: new Headers({
-					'Accept': 'application/json, text/plain, */*',
-					'Authorization': 'Basic ZWxhc3RpYzpBMzlrN2xWVFJNaUVYdGlhNHpSRUd6bmo=',
-					'Content-Type': 'application/json'
-				})
-			});
-		} else {
-			request = new Request('http://localhost:9200/norgerundt/_search', {
-				method: 'POST',
-				body: JSON.stringify({
-					query: {
-						query_string: {
-							query: input,
-							default_operator: "AND"
-						}
-					}
-				}),
-				headers: new Headers({
-					'Accept': 'application/json, text/plain, */*',
-					'Content-Type': 'application/json'
-				})
-			});
+	let request;
+	// if (isProd) {
+	// 	// request = new Request('http://57e71220df27cc6ca6912bfb750b0c4b.eu-west-1.aws.found.io:9200/norgerundt/_search', {
+	// 	request = new Request('https://57e71220df27cc6ca6912bfb750b0c4b.eu-west-1.aws.found.io:9243/norgerundt/_search', {
+	// 		method: 'POST',
+	// 		body: JSON.stringify({
+	// 			query: {
+	// 				query_string: {
+	// 					query: input,
+	// 					default_operator: "AND"
+	// 				}
+	// 			}
+	// 		}),
+	// 		headers: new Headers({
+	// 			'Accept': 'application/json, text/plain, */*',
+	// 			'Authorization': 'Basic ZWxhc3RpYzpBMzlrN2xWVFJNaUVYdGlhNHpSRUd6bmo=',
+	// 			'Content-Type': 'application/json'
+	// 		})
+	// 	});
+	// } else {
+	request = new Request('http://localhost:9200/norgerundt/_search', {
+		method: 'POST',
+		body: JSON.stringify({
+			query: {
+				query_string: {
+					query: input,
+					default_operator: "AND"
+				}
+			}
+		}),
+		headers: new Headers({
+			'Accept': 'application/json, text/plain, */*',
+			'Content-Type': 'application/json'
+		})
+	});
 
-		}
-
-		return fetch(request)
-			.then(res => res.json());
-	}
-	;
+	return fetch(request)
+		.then(res => res.json());
+}
 
 const searchHandler = function (request, reply) {
 	const input = request.payload.input;
