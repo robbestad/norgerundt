@@ -10,7 +10,9 @@ const fetch = require('isomorphic-fetch');
 const isProd = process.env.NODE_ENV === 'production';
 
 const server = new Hapi.Server();
-server.connection({host: '0.0.0.0', port: isProd ? 1996 : 1995});
+const PORT = process.env.PORT || 1996;
+const HOST = process.env.HOST || '0.0.0.0';
+server.connection({host: HOST, port: isProd ? PORT : 1995});
 
 const index = !isProd ? './index.html' : './dist/index.html';
 const plugins = [];

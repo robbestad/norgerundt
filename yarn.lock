@@ -3852,9 +3852,9 @@ supports-color@^3.1.0, supports-color@^3.1.1:
   dependencies:
     has-flag "^1.0.0"
 
-svenjs@^0.3.3:
-  version "0.3.3"
-  resolved "https://npm.nrk.no/s/svenjs/_attachments/svenjs-0.3.3.tgz#ccfa88991a6028a13b23d98ad9a0e94325a98e28"
+svenjs@^1.0.0:
+  version "1.0.1"
+  resolved "https://npm.nrk.no/s/svenjs/_attachments/svenjs-1.0.1.tgz#c9236a01c55696ce9d24c046fe6a15bf8234767e"
 
 svenjsx-loader@^0.3.1:
   version "0.3.1"
@@ -3937,14 +3937,6 @@ title-case@^2.1.0:
 to-fast-properties@^1.0.1:
   version "1.0.2"
   resolved "https://npm.nrk.no/t/to-fast-properties/_attachments/to-fast-properties-1.0.2.tgz#f3f5c0c3ba7299a7ef99427e44633257ade43320"
-
-todomvc-app-css@^2.0.0:
-  version "2.0.6"
-  resolved "https://npm.nrk.no/t/todomvc-app-css/_attachments/todomvc-app-css-2.0.6.tgz#0b3667c5e189f1568d9a9bf7947ebd928406961d"
-
-todomvc-common@^1.0.0:
-  version "1.0.2"
-  resolved "https://npm.nrk.no/t/todomvc-common/_attachments/todomvc-common-1.0.2.tgz#eb3ab61281ac74809f5869c917c7b08bc84234e0"
 
 topo@2.x.x:
   version "2.0.2"

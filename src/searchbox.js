@@ -2,33 +2,20 @@ const Component = require('../svenjs/packages/svenjs/dist/svenjs-component');
 const t = require('../svenjs/packages/svenjs/dist/svenjs-create-element');
 const eFetch = require('./eFetch');
 
+const delay = (() => {
+	var timer = 0;
+	return function (callback, ms) {
+		clearTimeout(timer);
+		timer = setTimeout(callback, ms);
+	};
+})();
+
 class SearchBox extends Component {
 	constructor() {
 		super();
 		this.state = {
-			searchVal: '',
 			hits: []
 		};
-		this.handleChange = this.handleChange.bind(this);
-	}
-
-
-	handleChange(e) {
-		const val = e.target.value.trimLeft();
-		this.setState({
-			searchVal: val
-		});
-		eFetch(val)
-			.then(data => {
-				try {
-					const hits = data.hits.hits;
-					this.setState({
-						hits
-					})
-				} catch (e) {
-					console.error('e', e);
-				}
-			});
 	}
 
 	render() {
@@ -41,8 +28,19 @@ class SearchBox extends Component {
 						class: 'inputfield',
 						placeHolder: 'Søk...',
 						type: 'text',
-						value: searchVal ? searchVal : '',
-						onKeyUp: this.handleChange
+						onKeyUp: e => delay(() => {
+							eFetch(e.target.value)
+								.then(data => {
+										try {
+											this.setState({
+												hits: data.hits.hits
+											})
+										} catch (e) {
+											console.error(e)
+										}
+									}
+								)
+						}, 600)
 					})
 				),
 				t('ul', {id: 'hits'},
