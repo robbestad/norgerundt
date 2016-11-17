@@ -25,7 +25,6 @@ class SearchBox extends Component {
 		this.setState({
 			currentPage: page
 		});
-		this.refs.inputfield.focus();
 	}
 
 	componentDidMount() {
