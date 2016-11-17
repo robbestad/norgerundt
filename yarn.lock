@@ -126,6 +126,12 @@ asn1@~0.2.3:
   version "0.2.3"
   resolved "https://npm.nrk.no/a/asn1/_attachments/asn1-0.2.3.tgz#dac8787713c9966849fc8180777ebe9c1ddf3b86"
 
+assert, assert@^1.1.1:
+  version "1.4.1"
+  resolved "https://npm.nrk.no/a/assert/_attachments/assert-1.4.1.tgz#99912d591836b5a6f5b345c0f07eefc08fc65d91"
+  dependencies:
+    util "0.10.3"
+
 assert-plus@^0.2.0:
   version "0.2.0"
   resolved "https://npm.nrk.no/a/assert-plus/_attachments/assert-plus-0.2.0.tgz#d74e1b87e7affc0db8aadb7021f3fe48101ab234"
@@ -133,12 +139,6 @@ assert-plus@^0.2.0:
 assert-plus@^1.0.0:
   version "1.0.0"
   resolved "https://npm.nrk.no/a/assert-plus/_attachments/assert-plus-1.0.0.tgz#f12e0f3c5d77b0b1cdd9146942e4e96c1e4dd525"
-
-assert@^1.1.1:
-  version "1.4.1"
-  resolved "https://npm.nrk.no/a/assert/_attachments/assert-1.4.1.tgz#99912d591836b5a6f5b345c0f07eefc08fc65d91"
-  dependencies:
-    util "0.10.3"
 
 ast-types@0.8.15:
   version "0.8.15"
@@ -1006,6 +1006,10 @@ braces@^1.8.2:
     preserve "^0.2.0"
     repeat-element "^1.1.2"
 
+browser-stdout@1.3.0:
+  version "1.3.0"
+  resolved "https://npm.nrk.no/b/browser-stdout/_attachments/browser-stdout-1.3.0.tgz#f351d32969d32fa5d7a5567154263d928ae3bd1f"
+
 browserify-zlib@~0.1.4:
   version "0.1.4"
   resolved "https://npm.nrk.no/b/browserify-zlib/_attachments/browserify-zlib-0.1.4.tgz#bb35f8a519f600e0fa6b8485241c979d0141fb2d"
@@ -1223,7 +1227,7 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@*, commander@^2.5.0, commander@^2.8.1, commander@^2.9.0, commander@2.9.x:
+commander@*, commander@^2.5.0, commander@^2.8.1, commander@^2.9.0, commander@2.9.0, commander@2.9.x:
   version "2.9.0"
   resolved "https://npm.nrk.no/c/commander/_attachments/commander-2.9.0.tgz#9c99094176e12240cb22d6c5146098400fe0f7d4"
   dependencies:
@@ -1416,7 +1420,7 @@ dateformat@1.0.2-1.2.3:
   version "1.0.2-1.2.3"
   resolved "https://npm.nrk.no/d/dateformat/_attachments/dateformat-1.0.2-1.2.3.tgz#b0220c02de98617433b72851cf47de3df2cdbee9"
 
-debug@^2.1.1, debug@^2.2.0, debug@~2.2.0:
+debug@^2.1.1, debug@^2.2.0, debug@~2.2.0, debug@2.2.0:
   version "2.2.0"
   resolved "https://npm.nrk.no/d/debug/_attachments/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
   dependencies:
@@ -1464,6 +1468,10 @@ detective@^4.3.1:
   dependencies:
     acorn "^3.1.0"
     defined "^1.0.0"
+
+diff@1.4.0:
+  version "1.4.0"
+  resolved "https://npm.nrk.no/d/diff/_attachments/diff-1.4.0.tgz#7f28d2eb9ee7b15a97efd89ce63dcfdaa3ccbabf"
 
 dom-serializer@~0.1.0, dom-serializer@0:
   version "0.1.0"
@@ -1584,7 +1592,7 @@ escape-html@~1.0.3:
   version "1.0.3"
   resolved "https://npm.nrk.no/e/escape-html/_attachments/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
 
-escape-string-regexp@^1.0.2:
+escape-string-regexp@^1.0.2, escape-string-regexp@1.0.5:
   version "1.0.5"
   resolved "https://npm.nrk.no/e/escape-string-regexp/_attachments/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
@@ -1906,6 +1914,17 @@ glob@~3.2.9:
     inherits "2"
     minimatch "0.3"
 
+glob@7.0.5:
+  version "7.0.5"
+  resolved "https://npm.nrk.no/g/glob/_attachments/glob-7.0.5.tgz#b4202a69099bbb4d292a7c1b95b6682b67ebdc95"
+  dependencies:
+    fs.realpath "^1.0.0"
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "^3.0.2"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
+
 globals@^8.3.0:
   version "8.18.0"
   resolved "https://npm.nrk.no/g/globals/_attachments/globals-8.18.0.tgz#93d4a62bdcac38cfafafc47d6b034768cb0ffcb4"
@@ -1936,6 +1955,10 @@ graceful-fs@~1.2.0:
 "graceful-readlink@>= 1.0.0":
   version "1.0.1"
   resolved "https://npm.nrk.no/g/graceful-readlink/_attachments/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
+
+growl@1.9.2:
+  version "1.9.2"
+  resolved "https://npm.nrk.no/g/growl/_attachments/growl-1.9.2.tgz#0ea7743715db8d8de2c5ede1775e1b45ac85c02f"
 
 grunt-contrib-clean@0.5.0:
   version "0.5.0"
@@ -2551,7 +2574,7 @@ json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://npm.nrk.no/j/json-stringify-safe/_attachments/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
-json3@^3.3.2:
+json3@^3.3.2, json3@3.3.2:
   version "3.3.2"
   resolved "https://npm.nrk.no/j/json3/_attachments/json3-3.3.2.tgz#3c0434743df93e2f5c42aee7b19bcb483575f4e1"
 
@@ -2639,6 +2662,10 @@ lodash._basecopy@^3.0.0:
   version "3.0.1"
   resolved "https://npm.nrk.no/l/lodash._basecopy/_attachments/lodash._basecopy-3.0.1.tgz#8da0e6a876cf344c0ad8a54882111dd3c5c7ca36"
 
+lodash._basecreate@^3.0.0:
+  version "3.0.3"
+  resolved "https://npm.nrk.no/l/lodash._basecreate/_attachments/lodash._basecreate-3.0.3.tgz#1bc661614daa7fc311b7d03bf16806a0213cf821"
+
 lodash._baseeach@^3.0.0:
   version "3.0.4"
   resolved "https://npm.nrk.no/l/lodash._baseeach/_attachments/lodash._baseeach-3.0.4.tgz#cf8706572ca144e8d9d75227c990da982f932af3"
@@ -2672,6 +2699,14 @@ lodash.assign@^3.0.0, lodash.assign@^3.2.0:
     lodash._baseassign "^3.0.0"
     lodash._createassigner "^3.0.0"
     lodash.keys "^3.0.0"
+
+lodash.create@3.1.1:
+  version "3.1.1"
+  resolved "https://npm.nrk.no/l/lodash.create/_attachments/lodash.create-3.1.1.tgz#d7f2849f0dbda7e04682bb8cd72ab022461debe7"
+  dependencies:
+    lodash._baseassign "^3.0.0"
+    lodash._basecreate "^3.0.0"
+    lodash._isiterateecall "^3.0.0"
 
 lodash.defaults@^3.1.2:
   version "3.1.2"
@@ -2896,11 +2931,27 @@ minimist@0.0.8:
   version "0.0.8"
   resolved "https://npm.nrk.no/m/minimist/_attachments/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
 
-mkdirp@^0.5.0, mkdirp@^0.5.1, "mkdirp@>=0.5 0", mkdirp@~0.5.0, mkdirp@~0.5.1:
+mkdirp@^0.5.0, mkdirp@^0.5.1, "mkdirp@>=0.5 0", mkdirp@~0.5.0, mkdirp@~0.5.1, mkdirp@0.5.1:
   version "0.5.1"
   resolved "https://npm.nrk.no/m/mkdirp/_attachments/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
+
+mocha:
+  version "3.1.2"
+  resolved "https://npm.nrk.no/m/mocha/_attachments/mocha-3.1.2.tgz#51f93b432bf7e1b175ffc22883ccd0be32dba6b5"
+  dependencies:
+    browser-stdout "1.3.0"
+    commander "2.9.0"
+    debug "2.2.0"
+    diff "1.4.0"
+    escape-string-regexp "1.0.5"
+    glob "7.0.5"
+    growl "1.9.2"
+    json3 "3.3.2"
+    lodash.create "3.1.1"
+    mkdirp "0.5.1"
+    supports-color "3.1.2"
 
 moment@2.x.x:
   version "2.15.1"
@@ -3846,7 +3897,7 @@ supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://npm.nrk.no/s/supports-color/_attachments/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
 
-supports-color@^3.1.0, supports-color@^3.1.1:
+supports-color@^3.1.0, supports-color@^3.1.1, supports-color@3.1.2:
   version "3.1.2"
   resolved "https://npm.nrk.no/s/supports-color/_attachments/supports-color-3.1.2.tgz#72a262894d9d408b956ca05ff37b2ed8a6e2a2d5"
   dependencies:
