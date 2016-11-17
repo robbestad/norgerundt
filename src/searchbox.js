@@ -2,6 +2,7 @@ const Component = require('../svenjs/packages/svenjs/dist/svenjs-component');
 const t = require('../svenjs/packages/svenjs/dist/svenjs-create-element');
 const eFetch = require('./eFetch');
 const counter = require('./pageCounter');
+const getQueryParam = require('./getQueryParam');
 
 const delay = (() => {
 	var timer = 0;
@@ -16,9 +17,11 @@ class SearchBox extends Component {
 		super();
 		this.state = {
 			hits: [],
-			currentPage: 1
+			currentPage: 1,
+			searchVal: ''
 		};
 		this.updateStart = this.updateStart.bind(this);
+		this.performQuery = this.performQuery.bind(this);
 	}
 
 	updateStart(page) {
@@ -40,6 +43,47 @@ class SearchBox extends Component {
 
 		this.updateStart(currentPage);
 		this.refs.inputfield.focus();
+
+		const page = getQueryParam('page', window.location);
+		const q = getQueryParam('q', window.location);
+
+		if (page) {
+			this.setState({
+				currentPage: page
+			});
+			// this.performQuery(q);
+		}
+
+		if (q) {
+			this.setState({
+				searchVal: q
+			});
+			this.performQuery(q);
+		}
+
+	}
+
+	performQuery(value) {
+		eFetch(value)
+			.then(data => {
+					if (history.pushState) {
+						history.pushState(null, null, '#page1');
+					}
+					else {
+						location.hash = '#page1';
+					}
+					try {
+
+						this.setState({
+							currentPage: 1,
+							hits: data.hits.hits
+						})
+					} catch (e) {
+						console.error(e)
+					}
+				}
+			)
+
 	}
 
 	render() {
@@ -75,25 +119,7 @@ class SearchBox extends Component {
 						placeHolder: 'Søk...',
 						type: 'text',
 						onKeyUp: e => delay(() => {
-							eFetch(e.target.value)
-								.then(data => {
-										if (history.pushState) {
-											history.pushState(null, null, '#page1');
-										}
-										else {
-											location.hash = '#page1';
-										}
-										try {
-
-											this.setState({
-												currentPage: 1,
-												hits: data.hits.hits
-											})
-										} catch (e) {
-											console.error(e)
-										}
-									}
-								)
+							this.performQuery(e.target.value);
 						}, 400)
 					})
 				),
