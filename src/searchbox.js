@@ -65,10 +65,6 @@ class SearchBox extends Component {
 		};
 
 		const {startCount, endCount} = counter(currentPage);
-		console.log('currentPage', currentPage);
-
-		console.log('hits.length', hits.length);
-
 		return t('div', {class: 'row'},
 			t('div', {class: 'app'},
 				t('h3', null, 'Søk i Norge Rundt'),
