@@ -24,3 +24,19 @@ ul.pages li{
 	display: inline-block;
 	padding: 5px;
 }
+
+ul.pages li a{
+	color: darkgreen
+}
+
+ul.pages li a:hover{
+	color: darkgreen
+}
+
+ul.pages li a:visited{
+	color: darkgreen
+}
+
+ul.pages li a.nolink{
+	color: black
+}

@@ -1,5 +1,3 @@
-'use strict';
-
 const Hapi = require('hapi');
 const path = require('path');
 const Inert = require('inert');
@@ -72,6 +70,7 @@ const getData = (input) => {
 	request = new Request('http://localhost:9200/norgerundt/_search', {
 		method: 'POST',
 		body: JSON.stringify({
+			size: 30,
 			query: {
 				query_string: {
 					query: input,
@@ -87,7 +86,7 @@ const getData = (input) => {
 
 	return fetch(request)
 		.then(res => res.json());
-}
+};
 
 const searchHandler = function (request, reply) {
 	const input = request.payload.input;

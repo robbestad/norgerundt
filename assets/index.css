@@ -81,6 +81,8 @@ input[type="text"] {
 
 .subdued {
 	color: olive;
+	padding-top: 10px;
+	font-size: 14px;
 }
 
 .subdued:hover {
@@ -91,6 +93,7 @@ input[type="text"] {
 	display: block;
 	color: green;
 	font-weight: bold;
+	font-size: 19px;
 }
 
 .infoline {
@@ -101,4 +104,6 @@ input[type="text"] {
 
 .infoblock {
 	padding: 10px;
+	font-size: 16px;
+	line-height: 22px;
 }

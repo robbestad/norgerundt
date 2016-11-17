@@ -24,7 +24,8 @@ class SearchBox extends Component {
 	updateStart(page) {
 		this.setState({
 			currentPage: page
-		})
+		});
+		this.refs.inputfield.focus();
 	}
 
 	componentDidMount() {
@@ -39,7 +40,6 @@ class SearchBox extends Component {
 		}
 
 		this.updateStart(currentPage);
-
 		this.refs.inputfield.focus();
 	}
 
@@ -57,6 +57,7 @@ class SearchBox extends Component {
 						onClick: () => this.updateStart(i + 1)
 					}, i + 1),
 					(i + 1 === Number(currentPage)) && t('a', {
+						class: 'nolink',
 						onClick: () => this.updateStart(i + 1)
 					}, i + 1),
 				))
@@ -77,8 +78,16 @@ class SearchBox extends Component {
 						onKeyUp: e => delay(() => {
 							eFetch(e.target.value)
 								.then(data => {
+										if (history.pushState) {
+											history.pushState(null, null, '#page1');
+										}
+										else {
+											location.hash = '#page1';
+										}
 										try {
+
 											this.setState({
+												currentPage: 1,
 												hits: data.hits.hits
 											})
 										} catch (e) {
@@ -86,7 +95,7 @@ class SearchBox extends Component {
 										}
 									}
 								)
-						}, 600)
+						}, 400)
 					})
 				),
 				t('ul', {id: 'hits'},

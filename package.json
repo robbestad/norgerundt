@@ -24,7 +24,7 @@
     "heroku": "git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m \"--wip-- [skip ci]\"",
     "postheroku": "git push heroku master",
     "makedist": "npm run copy:prod && npm run compress",
-    "postmakedist": "((cat assets/polyfill.js | cat - dist/index.min.html > dist/index.html) & rimraf dist/assets/*.css) && rimraf dist/index.min.html"
+    "postmakedist": "((cat assets/polyfill.js | cat - dist/index.min.html > dist/index.html) & rimraf dist/assets/*.css) && (rimraf dist/index.min.html & rimraf app.js)"
   },
   "devDependencies": {
     "assert": "^1.4.1",
