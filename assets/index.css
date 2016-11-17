@@ -80,13 +80,13 @@ input[type="text"] {
 }
 
 .subdued {
-	color: olive;
+	color: #003100;
 	padding-top: 10px;
 	font-size: 14px;
 }
 
 .subdued:hover {
-	color: red;
+	color: #006400;
 }
 
 .infohead {
@@ -106,4 +106,114 @@ input[type="text"] {
 	padding: 10px;
 	font-size: 16px;
 	line-height: 22px;
+}
+
+.site {
+	display: flex;
+	min-height: 100vh;
+	min-width: 100vw;
+	flex-direction: column;
+}
+
+.site-content {
+	flex: 1;
+}
+
+footer .center {
+	padding: 10px;
+	text-align: center;
+	background: white;
+}
+
+ul.pages {
+	list-style-type: none;
+	padding: 10px;
+	text-align: center;
+}
+
+ul.pages li {
+	display: inline-block;
+	padding: 5px;
+}
+
+ul.pages li a {
+	color: darkgreen
+}
+
+ul.pages li a:hover {
+	color: darkgreen
+}
+
+ul.pages li a:visited {
+	color: darkgreen
+}
+
+ul.pages li a.nolink {
+	color: black
+}
+
+@media screen and (max-width: 768px)
+{
+	.svenapp {
+		max-width: 90%;
+		margin: 5px auto;
+	}
+
+	.infoblock {
+		padding: 16px;
+		font-size: 16px;
+		line-height: 23px;
+	}
+
+	ul.pages li {
+		display: inline-block;
+		padding: 16px;
+	}
+
+	ul.pages li a {
+		font-size: 22px;
+	}
+
+	.subdued {
+		color: #003100;
+		padding-top: 18px;
+		font-size: 14px;
+	}
+
+	h3 {
+		font-size: 24px;
+	}
+}
+
+@media screen and (max-width: 414px)
+{
+	.svenapp {
+		max-width: 90%;
+		margin: 5px auto;
+	}
+
+	.infoblock {
+		padding: 16px;
+		font-size: 14px;
+		line-height: 23px;
+	}
+
+	ul.pages li {
+		display: inline-block;
+		padding: 5px;
+	}
+
+	ul.pages li a {
+		font-size: 16px;
+	}
+
+	.subdued {
+		color: #003100;
+		padding-top: 8px;
+		font-size: 14px;
+	}
+
+	h3 {
+		font-size: 24px;
+	}
 }
