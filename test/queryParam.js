@@ -1,4 +1,4 @@
-const getQueryParam = require('../src/getQueryParam');
+const getQueryParam = require('../src/utils/getQueryParam');
 
 var assert = require('assert');
 describe('getQueryParam', function() {

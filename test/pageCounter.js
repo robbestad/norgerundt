@@ -1,4 +1,4 @@
-const counter = require('../src/pageCounter');
+const counter = require('../src/utils/pageCounter');
 
 var assert = require('assert');
 describe('Counter', function() {

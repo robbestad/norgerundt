@@ -1,9 +1,9 @@
 const Component = require('../svenjs/packages/svenjs/dist/svenjs-component');
 const t = require('../svenjs/packages/svenjs/dist/svenjs-create-element');
 const eFetch = require('./eFetch');
-const counter = require('./pageCounter');
-const getQueryParam = require('./getQueryParam');
-const replaceQueryParam = require('./replaceQueryParam');
+const counter = require('./utils/pageCounter');
+const getQueryParam = require('./utils/getQueryParam');
+const replaceQueryParam = require('./utils/replaceQueryParam');
 
 const delay = (() => {
 	var timer = 0;

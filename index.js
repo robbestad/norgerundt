@@ -20,7 +20,7 @@ if (!isProd) {
 	plugins.push({
 			register: require('hapi-webpack-dev-middleware'),
 			options: {
-				config: require(path.join(__dirname, 'config', 'webpack.config.dev.js')),
+				config: require(path.join(__dirname, 'config', 'webpack.config.js')),
 				options: {
 					noInfo: true
 				}

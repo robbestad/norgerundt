@@ -1,4 +1,4 @@
-const replaceQueryParam = require('../src/replaceQueryParam');
+const replaceQueryParam = require('../src/utils/replaceQueryParam');
 var assert = require('assert');
 describe('replaceQueryParam', function () {
 	describe('q', function () {
@@ -14,9 +14,9 @@ describe('replaceQueryParam', function () {
 			const location = {href: '/?page=5&q=test'};
 			assert.equal('/?page=5&q=oslo', replaceQueryParam('q', 'oslo', location));
 		});
-		it('should return "page=5&q=oslo" when location has multiple queries', function () {
-			const location = {href: '/?page=5&q=test&test=query'};
-			assert.equal('/?page=5&q=oslo&test=query', replaceQueryParam('q', 'oslo', location));
+		it('should return query with norwegian characters', function () {
+			const location = {href: '/?page=5&q=oslo&test=query'};
+			assert.equal('/?page=5&q=søster&test=query', replaceQueryParam('q', 'søster', location));
 		});
 	});
 });

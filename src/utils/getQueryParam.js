@@ -1,7 +1,11 @@
 //pass location.href
 module.exports = function getQueryParam(param, location) {
+	const locationHref = decodeURIComponent(location.href);
+
 	const paddedParam = `${param}=`;
-	const q = location.href.substr(location.href.indexOf(paddedParam));
+	const q = locationHref.substr(locationHref.indexOf(paddedParam));
+	console.log('q', q);
+
 	const value = q.split(paddedParam);
 	let result = value[1];
 
