@@ -5,6 +5,9 @@ module.exports = function getQueryParam(param, location) {
 	const value = q.split(paddedParam);
 	let result = value[1];
 
+	if(!result){
+		return;
+	}
 	const hasMore = result.indexOf('&');
 
 	if (hasMore !== -1) {

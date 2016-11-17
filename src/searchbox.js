@@ -3,6 +3,7 @@ const t = require('../svenjs/packages/svenjs/dist/svenjs-create-element');
 const eFetch = require('./eFetch');
 const counter = require('./pageCounter');
 const getQueryParam = require('./getQueryParam');
+const replaceQueryParam = require('./replaceQueryParam');
 
 const delay = (() => {
 	var timer = 0;
@@ -22,60 +23,60 @@ class SearchBox extends Component {
 		};
 		this.updateStart = this.updateStart.bind(this);
 		this.performQuery = this.performQuery.bind(this);
+		this.putState = this.putState.bind(this);
+		this.updateLocation = this.updateLocation.bind(this);
 	}
 
 	updateStart(page) {
 		this.setState({
 			currentPage: page
 		});
+		const currentQuery = getQueryParam('q', window.location);
+		this.updateLocation(currentQuery, page);
+	}
+
+	updateLocation(query, page) {
+		let hrefLocation = replaceQueryParam('q', query, location);
+		hrefLocation = replaceQueryParam('page', page, {href: hrefLocation});
+		if (history.pushState) {
+			console.log('pushState', hrefLocation);
+
+			history.pushState(null, null, hrefLocation);
+		}
+		else {
+			location.href = hrefLocation;
+		}
 	}
 
 	componentDidMount() {
-		let currentPage = 1;
-
-		if (location.href.indexOf("#") != -1) {
-			const hash = location.href.substr(location.href.indexOf("#"));
-			const page = hash.split('page');
-			if (page[1]) {
-				currentPage = page[1];
-			}
-		}
-
-		this.updateStart(currentPage);
 		this.refs.inputfield.focus();
 
-		const page = getQueryParam('page', window.location);
+		const currentPage = getQueryParam('page', window.location);
+		console.log('currentPage', currentPage);
+
 		const q = getQueryParam('q', window.location);
-
-		if (page) {
-			this.setState({
-				currentPage: page
-			});
-			// this.performQuery(q);
-		}
-
+		this.putState('currentPage', currentPage);
+		this.putState('searchVal', q);
 		if (q) {
-			this.setState({
-				searchVal: q
-			});
-			this.performQuery(q);
+			this.performQuery(q, currentPage);
 		}
-
 	}
 
-	performQuery(value) {
+	putState(key, value) {
+		if (value) {
+			this.setState({
+				[key]: value
+			})
+		}
+	}
+
+	performQuery(value, page = 1) {
 		eFetch(value)
 			.then(data => {
-					if (history.pushState) {
-						history.pushState(null, null, '#page1');
-					}
-					else {
-						location.hash = '#page1';
-					}
 					try {
-
+						this.updateLocation(value, page);
 						this.setState({
-							currentPage: 1,
+							currentPage: page,
 							hits: data.hits.hits
 						})
 					} catch (e) {
@@ -87,21 +88,21 @@ class SearchBox extends Component {
 	}
 
 	render() {
-		const {hits, searchVal, currentPage} = this.state;
+		const {hits, currentPage} = this.state;
 
 		const pages = (hits, currentPage) => {
 			const max = Math.ceil(hits.length / 3);
 			let out = [];
-
+			let hrefLocation = replaceQueryParam('page', '1', location);
 			for (let i = 0; i < max; i++) {
+				hrefLocation = replaceQueryParam('page', i + 1, location);
 				out.push(t('li', null,
 					(i + 1 !== Number(currentPage)) && t('a', {
-						href: `#page${i + 1}`,
+						// href: hrefLocation,
 						onClick: () => this.updateStart(i + 1)
 					}, i + 1),
 					(i + 1 === Number(currentPage)) && t('a', {
-						class: 'nolink',
-						onClick: () => this.updateStart(i + 1)
+						class: 'nolink'
 					}, i + 1),
 				))
 			}
@@ -112,7 +113,10 @@ class SearchBox extends Component {
 		return t('div', {class: 'row'},
 			t('div', {class: 'app'},
 				t('h3', null, 'Søk i Norge Rundt'),
-				t('form', {class: 'search-form'},
+				t('form', {
+						class: 'search-form',
+						onSubmit: (e) => (e.preventDefault())
+					},
 					t('input', {
 						class: 'inputfield',
 						ref: 'inputfield',
