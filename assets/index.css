@@ -137,7 +137,8 @@ ul.pages li {
 }
 
 ul.pages li a {
-	color: darkgreen
+	color: darkgreen;
+	font-size: 16px;
 }
 
 ul.pages li a:hover {
@@ -152,8 +153,7 @@ ul.pages li a.nolink {
 	color: black
 }
 
-@media screen and (max-width: 768px)
-{
+@media screen and (max-width: 768px) {
 	.svenapp {
 		max-width: 90%;
 		margin: 5px auto;
@@ -167,15 +167,13 @@ ul.pages li a.nolink {
 
 	ul.pages li {
 		display: inline-block;
-		padding: 16px;
 	}
 
 	ul.pages li a {
-		font-size: 22px;
+		font-size: 20px;
 	}
 
 	.subdued {
-		color: #003100;
 		padding-top: 18px;
 		font-size: 14px;
 	}
@@ -185,8 +183,7 @@ ul.pages li a.nolink {
 	}
 }
 
-@media screen and (max-width: 414px)
-{
+@media screen and (max-width: 414px) {
 	.svenapp {
 		max-width: 90%;
 		margin: 5px auto;
@@ -210,7 +207,6 @@ ul.pages li a.nolink {
 	.subdued {
 		color: #003100;
 		padding-top: 8px;
-		font-size: 14px;
 	}
 
 	h3 {
