@@ -1,10 +1,17 @@
 {
   "private": true,
+  "version": "0.0.1",
+  "author": {
+    "name": "Sven A Robbestad",
+    "email": "robbestad@gmail.com"
+  },
+  "main": "dist/norgerundt.js",
+  "module": "dist/rollup-starter-project.mjs",
+  "jsnext:main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/svenanders/norgerundt.git"
   },
-  "main": "src/index.js",
   "directories": {
     "example": "dist"
   },
@@ -48,13 +55,21 @@
     "jstransform": "^11.0.3",
     "mocha": "^3.1.2",
     "rimraf": "^2.4.4",
+    "rollup": "^0.36.0",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-buble": "^0.14.0",
+    "rollup-plugin-commonjs": "^5.0.0",
+    "rollup-plugin-eslint": "^3.0.0",
+    "rollup-plugin-filesize": "^1.0.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-uglify": "^1.0.1",
     "uglify": "^0.1.5",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.8.2",
     "webpack-hot-middleware": "^2.13.2",
     "whatwg-fetch": "^2.0.1"
   },
-  "author": "Sven Anders Robbestad",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",

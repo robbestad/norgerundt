@@ -1,9 +1,9 @@
-const Component = require('../svenjs/packages/svenjs/dist/svenjs-component');
-const t = require('../svenjs/packages/svenjs/dist/svenjs-create-element');
-const eFetch = require('./eFetch');
-const counter = require('./utils/pageCounter');
-const getQueryParam = require('./utils/getQueryParam');
-const replaceQueryParam = require('./utils/replaceQueryParam');
+import Component from '../svenjs/packages/svenjs/dist/svenjs-component';
+import t from '../svenjs/packages/svenjs/dist/svenjs-create-element';
+import eFetch from './eFetch';
+import counter from './utils/pageCounter';
+import getQueryParam from './utils/getQueryParam';
+import replaceQueryParam from './utils/replaceQueryParam';
 
 const delay = (() => {
 	var timer = 0;
@@ -103,8 +103,8 @@ class SearchBox extends Component {
 					}, i + 1),
 					(i + 1 === Number(currentPage)) && t('a', {
 						class: 'nolink'
-					}, i + 1),
-				))
+					}, i + 1)
+				));
 			}
 			return out
 		};
@@ -139,7 +139,7 @@ class SearchBox extends Component {
 								hit._source.antrekk && t('div', null, `Antrekk: ${hit._source.antrekk}`),
 								t('div', null,
 									t('a', {target: '_blank', class: 'subdued', href: hit._source.url}, 'Se video')
-								),
+								)
 							))
 					}),
 					hits.length > 0 && t('ul', {class: 'pages'}, pages(hits, currentPage))
@@ -148,4 +148,5 @@ class SearchBox extends Component {
 		)
 	}
 }
-module.exports = t(SearchBox);
+
+export default t(SearchBox);

@@ -1,6 +1,6 @@
-const Component = require('../svenjs/packages/svenjs/dist/svenjs-component');
-const t = require('../svenjs/packages/svenjs/dist/svenjs-create-element');
-const searchBox = require('./searchbox');
+import Component from '../svenjs/packages/svenjs/dist/svenjs-component';
+import t  from '../svenjs/packages/svenjs/dist/svenjs-create-element';
+import searchBox  from './searchbox';
 
 class App extends Component {
 	render() {
@@ -9,4 +9,4 @@ class App extends Component {
 		)
 	}
 }
-module.exports = t(App);
+export default t(App);
