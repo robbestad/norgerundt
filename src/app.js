@@ -4,9 +4,7 @@ const searchBox = require('./searchbox');
 
 class App extends Component {
 	render() {
-		return t('div', {class: 'svenapp'},
-			searchBox
-		)
+		return searchBox
 	}
 }
 module.exports = t(App);

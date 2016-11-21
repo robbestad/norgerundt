@@ -1,10 +1,10 @@
-function counter(i) {
-	const start = i * 3;
-	return (start - 2) >= 0 ? start - 2 : (start - 1) >= 0 ? (start - 1) : 0
+function counter(i, max = 10) {
+	const start = i * max;
+	return (start - (max-1)) >= 0 ? start - (max-1) : (start - 1) >= 0 ? (start - 1) : 0
 }
 
-module.exports = function count(input) {
-	const startCount = counter(input) - 1;
-	const endCount = startCount + 2;
+module.exports = function count(input, max = 10) {
+	const startCount = counter(input, max) - 1;
+	const endCount = startCount + (max - 1);
 	return {startCount, endCount};
 };

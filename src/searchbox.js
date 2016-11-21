@@ -90,8 +90,8 @@ class SearchBox extends Component {
 	render() {
 		const {hits, currentPage} = this.state;
 
-		const pages = (hits, currentPage) => {
-			const max = Math.ceil(hits.length / 3);
+		const pages = (hits, currentPage, hitsPerPage = 10) => {
+			const max = Math.ceil(hits.length / hitsPerPage);
 			let out = [];
 			let hrefLocation = replaceQueryParam('page', '1', location);
 			for (let i = 0; i < max; i++) {
@@ -109,40 +109,63 @@ class SearchBox extends Component {
 			return out
 		};
 
+
 		const {startCount, endCount} = counter(currentPage);
-		return t('div', {class: 'row'},
-			t('div', {class: 'app'},
-				t('h3', null, 'Søk i Norge Rundt'),
+		return t('div', null,
+			t('div', {class: 'rowhead'},
+				t('h3', {class: 'fnt-head'}, 'Norge Rundt'),
 				t('form', {
 						class: 'search-form',
 						onSubmit: (e) => (e.preventDefault())
 					},
-					t('input', {
-						class: 'inputfield',
-						ref: 'inputfield',
-						placeHolder: 'Søk...',
-						type: 'text',
-						onKeyUp: e => delay(() => {
-							this.performQuery(e.target.value);
-						}, 400)
-					})
-				),
-				t('ul', {id: 'hits'},
-					hits && hits.map((hit, idx)=> {
-						return idx >= startCount && idx <= endCount && (t('li', {
-									class: 'infoblock'
-								},
-								t('div', {class: 'infohead'}, `${hit._source.tittel} (${hit._source.year})`),
-								hit._source.alder && t('div', null, `Personalder: ${hit._source.alder}`),
-								hit._source.antall_kvinner && t('div', null, `Kvinner: ${hit._source.antall_kvinner}`),
-								hit._source.antall_menn && t('div', null, `Menn: ${hit._source.antall_menn}`),
-								hit._source.antrekk && t('div', null, `Antrekk: ${hit._source.antrekk}`),
-								t('div', null,
-									t('a', {target: '_blank', class: 'subdued', href: hit._source.url}, 'Se video')
-								),
-							))
-					}),
-					hits.length > 0 && t('ul', {class: 'pages'}, pages(hits, currentPage))
+					t('div', {class: 'search-body'},
+						t('input', {
+							class: 'inputfield',
+							ref: 'inputfield',
+							placeHolder: 'Søk i Norge Rundt',
+							type: 'text',
+							onKeyUp: e => delay(() => {
+								this.performQuery(e.target.value);
+							}, 400)
+						})
+					)
+				)
+			),
+			t('div', {class: 'row'},
+				t('div', {class: 'column'},
+					t('form', {
+							class: 'search-form',
+							onSubmit: (e) => (e.preventDefault())
+						},
+						t('ul', {id: 'hits'},
+							hits && hits.map((hit, idx)=> {
+								const menn = Number(hit._source.antall_menn) === 1 ? 'en mann' : `${hit._source.antall_menn} menn`;
+								const kvinner = Number(hit._source.antall_kvinner) === 1 ? 'en kvinne' : `${hit._source.antall_kvinner} kvinner`;
+								const kommune = hit._source.kommune === 'Oslokommune' ? 'Oslo' : hit._source.kommune;
+								let _antrekk = hit._source.antrekk.toLowerCase().split(',');
+								const antrekk = _antrekk.reduce((prev, curr) => `${prev.toLowerCase()} og ${curr.toLowerCase()}`);
+								// console.log('hit._source', hit._source);
+
+								return idx >= startCount && idx <= endCount && (t('li', null,
+										t('a', {href: hit._source.url},
+											t('div', null, `${hit._source.tittel} (${hit._source.year})`)
+										),
+										hit._source.hovedtema && t('span', null,
+											t('small', null, `Tema: ${hit._source.hovedtema}. `),
+										),
+										t('br', null),
+										(hit._source.antall_menn || hit._source.antall_kvinner) && hit._source.kommune && t('span', null, `I dette innslaget fra ${kommune} ser du `),
+										hit._source.antall_kvinner && !hit._source.antall_menn && t('span', null, `${kvinner}. `),
+										hit._source.antall_menn && hit._source.antall_kvinner && t('span', null, `${menn} og ${kvinner}. `),
+										!hit._source.antall_kvinner && hit._source.antall_menn && t('span', null, `${menn}. `),
+										hit._source.alder && t('span', null, `Alder på personene i dette innslaget spenner fra ${hit._source.alder} år. `),
+										hit._source.antrekk && t('span', null, `Antrekk er ${antrekk}.`),
+										t('hr', null)
+									))
+							}),
+							hits.length > 0 && t('ul', {class: 'pages'}, pages(hits, currentPage))
+						)
+					)
 				)
 			)
 		)
