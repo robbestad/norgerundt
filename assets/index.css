@@ -4,25 +4,18 @@ body {
 	height: 100%;
 	width: 100vw;
 	line-height: 1.5em;
-	background: white;
+	background-color: #f1f1f1;
 	-webkit-font-smoothing: antialiased;
 	font-weight: 300;
 	font-family: 'Droid Sans', sans-serif;
 	font-size: 18px;
 }
 
-.fnt-head {
-	font-family: 'Sorts Mill Goudy', serif;
-	font-size: 20px;
-	width: 10vw;
-	min-width: 150px;
-	padding: 10px;
-}
-
 .fnt-body {
 	font-family: 'Droid Sans', sans-serif;
 }
-.header{
+
+.header {
 	display: inline-flex;
 }
 
@@ -30,7 +23,7 @@ a {
 	text-decoration: none;
 }
 
-.rowhead{
+.rowhead {
 	display: flex;
 	width: 100vw;
 	min-height: 40px;
@@ -50,6 +43,14 @@ a {
 	flex-direction: column;
 }
 
+.header-left {
+	width: 50vw;
+}
+
+.header-right {
+	width: 50vw;
+}
+
 .svenapp {
 	background: #fff;
 	display: flex;
@@ -62,23 +63,20 @@ a {
 }
 
 h3 {
+	font-family: 'Sorts Mill Goudy', serif;
+	font-size: 20px;
 	text-align: left;
-	padding:0;
-	margin:5px;
-}
-
-.search-form {
-	padding: 8px 10px 0 0;
+	padding: 0;
+	margin: 5px;
 }
 
 input[type="text"] {
 	font-size: 20px;
 	border-radius: 1px;
-	max-width: 50vw;
 	border: 2px solid #ddd;
 	padding: 3px;
 	margin: 0 10px 0 10px;
-	min-width: 200px;
+	width: 100%;
 }
 
 .footer {
@@ -136,21 +134,8 @@ input[type="text"] {
 }
 
 footer {
-	text-align: right;
-	padding: 5px 20px 5px 5px;
+	text-align: center;
 	margin: 0;
-	background: white;
-}
-
-ul.pages {
-	list-style-type: none;
-	padding: 0 10px 0 0;
-	text-align: left;
-}
-
-ul.pages li {
-	display: inline-block;
-	padding: 5px;
 }
 
 ul#hits {
@@ -163,7 +148,15 @@ ul#hits {
 }
 
 ul#hits li {
-	padding: 0 0 10px 0;
+	margin: 10px 0 10px 0;
+	padding: 10px;
+	background: white;
+	/*border: 1px solid #999;*/
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	font-smoothing: antialiased;
 }
 
 hr {
@@ -192,12 +185,29 @@ ul.pages li a.nolink {
 	background: white;
 }
 
-@media screen and (max-width: 768px) {
+ul.pages {
+	list-style-type: none;
+	padding: 0 10px 20px;
+	text-align: center;
+}
 
-	.fnt-head {
-		width: 40vw;
-		font-size: 16px;
+ul.pages li {
+	display: inline-block;
+	padding: 5px;
+}
+
+
+@media screen and (max-width: 768px) {
+	.header-left {
+		width: 35%;
+		padding-top: 5px;
 	}
+
+	.header-right {
+		width: 65%;
+		padding-top: 5px;
+	}
+
 	input[type="text"] {
 		width: 55vw;
 	}
