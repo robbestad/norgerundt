@@ -14,7 +14,9 @@ body {
 .fnt-head {
 	font-family: 'Sorts Mill Goudy', serif;
 	font-size: 20px;
-	width: 30vw;
+	width: 10vw;
+	min-width: 150px;
+	padding: 10px;
 }
 
 .fnt-body {
@@ -32,6 +34,7 @@ a {
 	display: flex;
 	width: 100vw;
 	min-height: 40px;
+	max-height: 55px;
 	background-color: #f1f1f1;
 	border-bottom: 1px solid #e5e5e5;
 }
@@ -65,15 +68,17 @@ h3 {
 }
 
 .search-form {
+	padding: 8px 10px 0 0;
 }
 
 input[type="text"] {
 	font-size: 20px;
 	border-radius: 1px;
-	width: 50vw;
+	max-width: 50vw;
 	border: 2px solid #ddd;
 	padding: 3px;
-	margin: 0 0 0 20px;
+	margin: 0 10px 0 10px;
+	min-width: 200px;
 }
 
 .footer {
@@ -188,15 +193,13 @@ ul.pages li a.nolink {
 }
 
 @media screen and (max-width: 768px) {
-	.svenapp {
-		max-width: 90%;
-		margin: 5px auto;
-	}
 
-	.infoblock {
-		padding: 16px;
+	.fnt-head {
+		width: 40vw;
 		font-size: 16px;
-		line-height: 23px;
+	}
+	input[type="text"] {
+		width: 55vw;
 	}
 
 	ul.pages li {
@@ -206,44 +209,5 @@ ul.pages li a.nolink {
 	ul.pages li a {
 		font-size: 20px;
 	}
-
-	.subdued {
-		padding-top: 18px;
-		font-size: 14px;
-	}
-
-	h3 {
-		font-size: 24px;
-	}
 }
 
-@media screen and (max-width: 414px) {
-	.svenapp {
-		max-width: 90%;
-		margin: 5px auto;
-	}
-
-	.infoblock {
-		padding: 16px;
-		font-size: 14px;
-		line-height: 23px;
-	}
-
-	ul.pages li {
-		display: inline-block;
-		padding: 5px;
-	}
-
-	ul.pages li a {
-		font-size: 16px;
-	}
-
-	.subdued {
-		color: #003100;
-		padding-top: 8px;
-	}
-
-	h3 {
-		font-size: 24px;
-	}
-}
