@@ -112,20 +112,17 @@ class SearchBox extends Component {
 			t('div', {class: 'rowhead'},
 				t('div', {class: 'header-left'},
 					t('a', {href: '/'},
-						t('h3', {class: 'fnt-head'}, 'Norge Rundt')
+						t('img', {class: 'logo', src: '/assets/logo80.png'})
 					)
 				),
-				t('div', {class: 'header-right'},
+				hits.length > 0 && t('div', {class: 'header-right'},
 					t('form', {
 							onSubmit: (e) => (e.preventDefault())
 						},
 						t('input', {
 							ref: 'inputfield',
 							placeHolder: 'Søk i Norge Rundt',
-							type: 'text',
-							// onKeyUp: e => delay(() => {
-							// 	this.performQuery(e.target.value);
-							// }, 400)
+							type: 'text'
 						}),
 						t('input',
 							{
@@ -140,9 +137,32 @@ class SearchBox extends Component {
 				)
 			),
 			!hits.length && t('div', {class: 'row'},
-				t('div', {class: 'frontpage-image-block'},
+				t('div', {class: 'frontpage-block'},
 					t('h1', null, 'Søk i alle Norge Rundts sendinger'),
-					t('img', {src: '/assets/norgerundt.jpg', class: 'frontpage-image'})
+					t('img', {src: '/assets/norgerundt.jpg', class: 'frontpage-image'}),
+					t('div', {class: 'form-center'},
+						t('form', {
+								onSubmit: (e) => (e.preventDefault())
+							},
+							t('input', {
+								ref: 'inputfield',
+								placeHolder: 'Søk i Norge Rundt',
+								type: 'text',
+								// onKeyUp: e => delay(() => {
+								// 	this.performQuery(e.target.value);
+								// }, 400)
+							}),
+							t('input',
+								{
+									type: 'button',
+									value: 'Søk',
+									onClick: e => {
+										this.performQuery(this.refs.inputfield.value);
+									}
+								}
+							)
+						)
+					)
 				)
 			),
 			hits.length > 0 && t('div', {class: 'row'},
