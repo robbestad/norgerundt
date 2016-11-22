@@ -75,6 +75,7 @@ class SearchBox extends Component {
 						this.updateLocation(value, page);
 						this.setState({
 							currentPage: page,
+							searchVal: value,
 							hits: data.hits.hits
 						})
 					} catch (e) {
@@ -126,7 +127,12 @@ class SearchBox extends Component {
 							ref: 'inputfield',
 							value: searchVal,
 							placeHolder: placeHolder,
-							type: 'text'
+							type: 'text',
+							onKeypress: e => {
+								if(e.charCode === 13){
+									this.performQuery(e.target.value);
+								}
+							}
 						}),
 						t('input',
 							{
@@ -153,6 +159,11 @@ class SearchBox extends Component {
 								placeHolder: placeHolder,
 								type: 'text',
 								value: searchVal,
+								onKeypress: e => {
+									if(e.charCode === 13){
+										this.performQuery(e.target.value);
+									}
+								}
 								// onKeyUp: e => delay(() => {
 								// 	this.performQuery(e.target.value);
 								// }, 400)
