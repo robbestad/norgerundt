@@ -211,6 +211,14 @@ ul.pages li {
 		padding-top: 5px;
 	}
 
+	.rowhead{
+		height: 45px;
+	}
+
+	.form-center {
+		padding: 20px 0 0 0;
+	}
+
 	h1 {
 		font-size: 18px;
 	}
