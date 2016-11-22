@@ -107,7 +107,7 @@ class SearchBox extends Component {
 		};
 
 		const placeHolderItems = ['Vinter', 'Oslo', 'Hatt', 'Akvarium'];
-		const placeHolder = placeHolderItems[Math.floor(Math.random()*placeHolderItems.length)];
+		const placeHolder = placeHolderItems[Math.floor(Math.random() * placeHolderItems.length)];
 
 
 		const {startCount, endCount} = counter(currentPage);
@@ -174,9 +174,18 @@ class SearchBox extends Component {
 						const menn = Number(hit._source.antall_menn) === 1 ? 'en mann' : `${hit._source.antall_menn} menn`;
 						const kvinner = Number(hit._source.antall_kvinner) === 1 ? 'en kvinne' : `${hit._source.antall_kvinner} kvinner`;
 						const kommune = hit._source.kommune === 'Oslokommune' ? 'Oslo' : hit._source.kommune;
-						let _antrekk = hit._source.antrekk.toLowerCase().split(',');
-						const antrekk = _antrekk.reduce((prev, curr) => `${prev.toLowerCase()} og ${curr.toLowerCase()}`);
-						// console.log('hit._source', hit._source);
+						const _a = hit._source.antrekk.toLowerCase().split(',');
+						let antrekk = '';
+						if (_a.length === 1) {
+							antrekk = _a[_a.length - 1];
+						} else {
+							_a.forEach((a, i) => {
+								if (i + 1 === _a.length) antrekk += ' og ';
+								antrekk += a;
+								if (i + 2 < _a.length) antrekk += ', ';
+							});
+
+						}
 
 						return idx >= startCount && idx <= endCount && (t('li', null,
 								t('a', {href: hit._source.url},
