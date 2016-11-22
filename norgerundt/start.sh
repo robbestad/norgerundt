@@ -40,6 +40,56 @@ echo "Indexing data..."
 
 echo "Indexing groups..."
 sh transform.sh
+
+#curl -XPUT 'localhost:9200/norgerundt-titler?pretty' -d'
+#{
+#    "mappings": {
+#        "tittel" : {
+#            "properties" : {
+#                "suggest" : {
+#                    "type" : "completion"
+#                },
+#                "title" : {
+#                    "type": "keyword"
+#                }
+#            }
+#        }
+#    }
+#}'
+#
+#curl -XPUT 'localhost:9200/norgerundt-titler/tittel/1?refresh&pretty' -d'
+#{
+#    "suggest" : {
+#        "input": [ "Oslo", "Oslokommune" ],
+#        "weight" : 34
+#    }
+#}'
+#
+#
+#curl -XPOST 'localhost:9200/norgerundt-titler/_suggest?pretty&pretty' -d'
+#{
+#    "tittel-suggest" : {
+#        "prefix" : "osl",
+#        "completion" : {
+#            "field" : "suggest"
+#        }
+#    }
+#}'
+
+curl -XPOST 'localhost:9200/norgerundt/_suggest?pretty&pretty' -d'
+{
+    "song-suggest" : {
+        "prefix" : "osl",
+        "completion" : {
+            "field" : "suggest",
+            "fuzzy" : {
+                "fuzziness" : 2
+            }
+        }
+    }
+}'
+
+
 #sh insert_norgerundt.sh > /dev/null
 #echo "Done indexing groups."
 #

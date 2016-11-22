@@ -4,7 +4,7 @@ body {
 	height: 100%;
 	width: 100vw;
 	line-height: 1.5em;
-	background-color: #f1f1f1;
+	background-color: rgba(241, 241, 241, 0.5);
 	-webkit-font-smoothing: antialiased;
 	font-weight: 300;
 	font-family: 'Droid Sans', sans-serif;
@@ -49,6 +49,8 @@ a {
 
 .header-right {
 	width: 50vw;
+	text-align: right;
+	margin: 0 10px 0 0;
 }
 
 .svenapp {
@@ -74,9 +76,32 @@ input[type="text"] {
 	font-size: 20px;
 	border-radius: 1px;
 	border: 2px solid #ddd;
-	padding: 3px;
-	margin: 0 10px 0 10px;
-	width: 100%;
+	padding: 2px;
+	margin: 2px 5px 0 10px;
+	max-width: 70%;
+	min-width: 150px;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+}
+
+input[type="button"] {
+	font-size: 20px;
+	border-radius: 1px;
+	border: 2px solid #ddd;
+	padding: 2px;
+	margin: 2px 0 0 0;
+	max-width: 30%;
+	min-width: 60px;
+	background-color: white;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+
 }
 
 .footer {
@@ -143,8 +168,8 @@ ul#hits {
 	text-align: left;
 	line-height: 22px;
 	display: flex;
+	width: 100%;
 	flex-direction: column;
-	padding: 10px;
 }
 
 ul#hits li {
@@ -196,11 +221,14 @@ ul.pages li {
 	padding: 5px;
 }
 
-
 @media screen and (max-width: 768px) {
 	.header-left {
 		width: 35%;
 		padding-top: 5px;
+	}
+
+	.row {
+		width: 96vw;
 	}
 
 	.header-right {

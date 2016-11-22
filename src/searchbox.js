@@ -39,13 +39,12 @@ class SearchBox extends Component {
 		let hrefLocation = replaceQueryParam('q', query, location);
 		hrefLocation = replaceQueryParam('page', page, {href: hrefLocation});
 		if (history.pushState) {
-			console.log('pushState', hrefLocation);
-
 			history.pushState(null, null, hrefLocation);
 		}
 		else {
 			location.href = hrefLocation;
 		}
+		window.scrollTo(0, 0);
 	}
 
 	componentDidMount() {
@@ -96,8 +95,8 @@ class SearchBox extends Component {
 				hrefLocation = replaceQueryParam('page', i + 1, location);
 				out.push(t('li', null,
 					(i + 1 !== Number(currentPage)) && t('a', {
-						// href: hrefLocation,
-						onClick: () => this.updateStart(i + 1)
+						href: hrefLocation
+						// onClick: () => this.updateStart(i + 1)
 					}, i + 1),
 					(i + 1 === Number(currentPage)) && t('a', {
 						class: 'nolink'
@@ -112,7 +111,9 @@ class SearchBox extends Component {
 		return t('div', null,
 			t('div', {class: 'rowhead'},
 				t('div', {class: 'header-left'},
-					t('h3', {class: 'fnt-head'}, 'Norge Rundt')
+					t('a', {href: '/'},
+						t('h3', {class: 'fnt-head'}, 'Norge Rundt')
+					)
 				),
 				t('div', {class: 'header-right'},
 					t('form', {
@@ -120,13 +121,21 @@ class SearchBox extends Component {
 						},
 						t('input', {
 							ref: 'inputfield',
-							class: 'search-form',
 							placeHolder: 'Søk i Norge Rundt',
 							type: 'text',
-							onKeyUp: e => delay(() => {
-								this.performQuery(e.target.value);
-							}, 400)
-						})
+							// onKeyUp: e => delay(() => {
+							// 	this.performQuery(e.target.value);
+							// }, 400)
+						}),
+						t('input',
+							{
+								type: 'button',
+								value: 'Søk',
+								onClick: e => {
+									this.performQuery(this.refs.inputfield.value);
+								}
+							}
+						)
 					)
 				)
 			),
