@@ -1,5 +1,5 @@
 const SvenDOM = require('../svenjs/packages/svenjs/dist/svenjs-dom');
-const rootNode = document.getElementById('myapp');
+const rootNode = document.querySelector('.site-content');
 const app = require('./app');
 
 exports.mount = () => SvenDOM.render(
