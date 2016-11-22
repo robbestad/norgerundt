@@ -63,7 +63,7 @@ a:visited, a:active, a:hover {
 	width: 100vw;
 	min-height: 40px;
 	max-height: 55px;
-	background-color: rgba(241, 241, 241, 0.5);
+	background-color: rgb(57, 85, 122);
 	border-bottom: 1px solid #e5e5e5;
 }
 
@@ -115,20 +115,20 @@ a:hover {
 }
 
 input[type="text"] {
-	font-size: 20px;
+	font-size: 18px;
 	border-radius: 1px;
-	border: 2px solid #ddd;
-	padding: 2px;
+	border: 1px solid rgba(57, 85, 122, 0.5);
+	padding: 6px;
 	margin: 5px 5px 0 10px;
 	max-width: 70%;
 	min-width: 150px;
 }
 
 input[type="button"] {
-	font-size: 20px;
+	font-size: 18px;
 	border-radius: 1px;
-	border: 2px solid #ddd;
-	padding: 2px;
+	border: 1px solid rgba(57, 85, 122, 0.5);
+	padding: 6px;
 	margin: 5px 0 0 0;
 	max-width: 30%;
 	min-width: 60px;
@@ -147,7 +147,7 @@ input[type="button"] {
 
 footer {
 	text-align: center;
-	margin: 0;
+	padding: 0 0 20px 0;
 }
 
 ul#hits {
@@ -225,8 +225,8 @@ ul.pages li {
 	}
 
 	.header-right {
-		width: 65%;
-		padding-top: 5px;
+		width: 75%;
+		padding-top: 8px;
 	}
 
 	input[type="text"] {

@@ -106,6 +106,9 @@ class SearchBox extends Component {
 			return out
 		};
 
+		const placeHolderItems = ['Vinter', 'Oslo', 'Hatt', 'Akvarium'];
+		const placeHolder = placeHolderItems[Math.floor(Math.random()*placeHolderItems.length)];
+
 
 		const {startCount, endCount} = counter(currentPage);
 		return t('div', null,
@@ -121,7 +124,7 @@ class SearchBox extends Component {
 						},
 						t('input', {
 							ref: 'inputfield',
-							placeHolder: 'Søk i Norge Rundt',
+							placeHolder: placeHolder,
 							type: 'text'
 						}),
 						t('input',
@@ -146,7 +149,7 @@ class SearchBox extends Component {
 							},
 							t('input', {
 								ref: 'inputfield',
-								placeHolder: 'Søk i Norge Rundt',
+								placeHolder: placeHolder,
 								type: 'text',
 								// onKeyUp: e => delay(() => {
 								// 	this.performQuery(e.target.value);
