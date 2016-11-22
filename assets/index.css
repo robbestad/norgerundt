@@ -19,8 +19,19 @@ body {
 	flex-shrink: 1;
 }
 
-.fnt-body {
-	font-family: 'Droid Sans', sans-serif;
+.no-hits-block {
+	padding: 10px 0 0 0;
+	display: flex;
+	width: 100vw;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.search-no-hits{
+	text-align: center;
+	font-size: 16px;
+	color: darkred;
 }
 
 .frontpage-block {

@@ -16,10 +16,11 @@ const delay = (() => {
 class SearchBox extends Component {
 	constructor() {
 		super();
+		const q = getQueryParam('q', window.location);
 		this.state = {
 			hits: [],
 			currentPage: 1,
-			searchVal: ''
+			searchVal: q ? q : ''
 		};
 		this.updateStart = this.updateStart.bind(this);
 		this.performQuery = this.performQuery.bind(this);
@@ -85,7 +86,7 @@ class SearchBox extends Component {
 	}
 
 	render() {
-		const {hits, currentPage} = this.state;
+		const {searchVal, hits, currentPage} = this.state;
 
 		const pages = (hits, currentPage, hitsPerPage = 10) => {
 			const max = Math.ceil(hits.length / hitsPerPage);
@@ -109,7 +110,6 @@ class SearchBox extends Component {
 		const placeHolderItems = ['Vinter', 'Oslo', 'Hatt', 'Akvarium'];
 		const placeHolder = placeHolderItems[Math.floor(Math.random() * placeHolderItems.length)];
 
-
 		const {startCount, endCount} = counter(currentPage);
 		return t('div', null,
 			t('div', {class: 'rowhead'},
@@ -124,6 +124,7 @@ class SearchBox extends Component {
 						},
 						t('input', {
 							ref: 'inputfield',
+							value: searchVal,
 							placeHolder: placeHolder,
 							type: 'text'
 						}),
@@ -151,6 +152,7 @@ class SearchBox extends Component {
 								ref: 'inputfield',
 								placeHolder: placeHolder,
 								type: 'text',
+								value: searchVal,
 								// onKeyUp: e => delay(() => {
 								// 	this.performQuery(e.target.value);
 								// }, 400)
@@ -166,6 +168,11 @@ class SearchBox extends Component {
 							)
 						)
 					)
+				)
+			),
+			searchVal !== '' && !hits.length && t('div', {class: 'row animated fadeIn'},
+				t('div', {class: 'no-hits-block'},
+					t('div', {class: 'search-no-hits'}, `Ingen treff på '${searchVal}'`)
 				)
 			),
 			hits.length > 0 && t('div', {class: 'row'},
