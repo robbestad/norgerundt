@@ -139,9 +139,15 @@ class SearchBox extends Component {
 					)
 				)
 			),
-			t('div', {class: 'row'},
+			!hits.length && t('div', {class: 'row'},
+				t('div', {class: 'frontpage-image-block'},
+					t('h1', null, 'Søk i alle Norge Rundts sendinger'),
+					t('img', {src: '/assets/norgerundt.jpg', class: 'frontpage-image'})
+				)
+			),
+			hits.length > 0 && t('div', {class: 'row'},
 				t('ul', {id: 'hits'},
-					hits && hits.map((hit, idx)=> {
+					hits.map((hit, idx)=> {
 						const menn = Number(hit._source.antall_menn) === 1 ? 'en mann' : `${hit._source.antall_menn} menn`;
 						const kvinner = Number(hit._source.antall_kvinner) === 1 ? 'en kvinne' : `${hit._source.antall_kvinner} kvinner`;
 						const kommune = hit._source.kommune === 'Oslokommune' ? 'Oslo' : hit._source.kommune;
