@@ -1,5 +1,5 @@
 <script type="text/javascript">
-if(!window.fetch){
+if(!window.fetch || !window.Request){
 	(function(document, tag) {
 		var scriptTag = document.createElement(tag), // create a script tag
 			firstScriptTag = document.getElementsByTagName(tag)[0]; // find the first script tag in the document
