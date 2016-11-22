@@ -139,7 +139,7 @@ class SearchBox extends Component {
 					)
 				)
 			),
-			!hits.length && t('div', {class: 'row'},
+			!hits.length && t('div', {class: 'row animated fadeIn'},
 				t('div', {class: 'frontpage-block'},
 					t('h1', null, 'Søk i alle Norge Rundts sendinger'),
 					t('img', {src: '/assets/norgerundt.jpg', class: 'frontpage-image'}),
