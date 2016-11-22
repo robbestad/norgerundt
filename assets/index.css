@@ -19,7 +19,7 @@ body {
 	flex-shrink: 1;
 }
 
-.no-hits-block {
+.search-no-hits-block {
 	padding: 10px 0 0 0;
 	display: flex;
 	width: 100vw;
@@ -28,7 +28,7 @@ body {
 	flex-direction: column;
 }
 
-.search-no-hits{
+.search-no-hits {
 	text-align: center;
 	font-size: 16px;
 	color: darkred;
@@ -63,7 +63,7 @@ a:visited, a:active, a:hover {
 	color: #609;
 }
 
-.rowhead {
+.row-head {
 	display: flex;
 	width: 100%;
 	height: 55px;
@@ -90,11 +90,6 @@ a:visited, a:active, a:hover {
 	width: 90%;
 	text-align: right;
 	margin: 0 10px 0 0;
-}
-
-.svenapp input::-webkit-input-placeholder {
-	font-style: italic;
-	font-weight: 300;
 }
 
 h1 {
@@ -142,16 +137,6 @@ input[type="button"] {
 .form-center input {
 	box-shadow: none;
 	padding: 8px;
-}
-
-.footer {
-	color: #777;
-	border-top: 1px solid #e6e6e6;
-}
-
-footer {
-	text-align: center;
-	padding: 30px 0 0 0;
 }
 
 ul#hits {
@@ -207,6 +192,15 @@ ul.pages li {
 	width: 40px;
 	height: 40px;
 	padding: 2px 0 0 5px;
+}
+
+footer {
+	color: #777;
+	font-size: 14px;
+	font-family: 'Droid Sans', sans-serif;
+	border-top: 1px solid #e6e6e6;
+	text-align: center;
+	padding: 30px 0 0 0;
 }
 
 @media screen and (max-width: 768px) {

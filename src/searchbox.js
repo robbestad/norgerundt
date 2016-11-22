@@ -113,7 +113,7 @@ class SearchBox extends Component {
 
 		const {startCount, endCount} = counter(currentPage);
 		return t('div', null,
-			t('div', {class: 'rowhead'},
+			t('div', {class: 'row-head'},
 				t('div', {class: 'header-left'},
 					t('a', {href: '/'},
 						t('img', {class: 'logo', src: '/assets/logo80.png'})
@@ -182,7 +182,7 @@ class SearchBox extends Component {
 				)
 			),
 			searchVal !== '' && !hits.length && t('div', {class: 'row animated fadeIn'},
-				t('div', {class: 'no-hits-block'},
+				t('div', {class: 'search-no-hits-block'},
 					t('div', {class: 'search-no-hits'}, `Ingen treff på '${searchVal}'`)
 				)
 			),
