@@ -19,6 +19,7 @@ class SearchBox extends Component {
 		const q = getQueryParam('q', window.location);
 		this.state = {
 			hits: [],
+			ac: [],
 			currentPage: 1,
 			searchVal: q ? q : ''
 		};
@@ -68,6 +69,23 @@ class SearchBox extends Component {
 		}
 	}
 
+	performAcQuery(value) {
+		eFetch(value, '/ac')
+			.then(data => {
+					// data.hits.hits.forEach(item => {
+					// 	console.log(item._source.text_field[0]);
+					// })
+					try {
+						this.setState({
+							ac: data.hits.hits
+						})
+					} catch (e) {
+						console.error(e)
+					}
+				}
+			)
+	}
+
 	performQuery(value, page = 1) {
 		eFetch(value)
 			.then(data => {
@@ -87,7 +105,7 @@ class SearchBox extends Component {
 	}
 
 	render() {
-		const {searchVal, hits, currentPage} = this.state;
+		const {searchVal, hits, currentPage, ac} = this.state;
 
 		const pages = (hits, currentPage, hitsPerPage = 10) => {
 			const max = Math.ceil(hits.length / hitsPerPage);
@@ -129,7 +147,7 @@ class SearchBox extends Component {
 							placeHolder: placeHolder,
 							type: 'text',
 							onKeypress: e => {
-								if(e.charCode === 13){
+								if (e.charCode === 13) {
 									this.performQuery(e.target.value);
 								}
 							}
@@ -160,13 +178,13 @@ class SearchBox extends Component {
 								type: 'text',
 								value: searchVal,
 								onKeypress: e => {
-									if(e.charCode === 13){
+									if (e.charCode === 13) {
 										this.performQuery(e.target.value);
 									}
-								}
-								// onKeyUp: e => delay(() => {
-								// 	this.performQuery(e.target.value);
-								// }, 400)
+								},
+								onKeyUp: e => delay(() => {
+									this.performAcQuery(e.target.value);
+								}, 400)
 							}),
 							t('input',
 								{
@@ -177,6 +195,9 @@ class SearchBox extends Component {
 									}
 								}
 							)
+						),
+						ac.length > 0 && t('ul', {class: 'suggest'},
+							ac.map(item => t('li', {class: 'item'}, item._source.text_field[0]))
 						)
 					)
 				)

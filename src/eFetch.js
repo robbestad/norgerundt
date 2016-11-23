@@ -1,8 +1,8 @@
-module.exports = function (input) {
+module.exports = function (input, endpoint='/search') {
 	if (input.length < 2) {
 		return Promise.resolve({hits: []});
 	}
-	const request = new Request('/search', {
+	const request = new Request(endpoint, {
 		method: 'POST',
 		body: JSON.stringify({
 			input
