@@ -4,9 +4,6 @@
     <list default="true" id="980e1376-e1da-477d-b852-44ca55fd604b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/svenjs" afterPath="$PROJECT_DIR$/svenjs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/index.css" afterPath="$PROJECT_DIR$/assets/index.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eFetch.js" afterPath="$PROJECT_DIR$/src/eFetch.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/searchbox.js" afterPath="$PROJECT_DIR$/src/searchbox.js" />
     </list>
     <ignored path="norgerundt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -119,8 +116,8 @@
       <file leaf-file-name="index.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/index.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="210" column="25" selection-start-line="210" selection-start-column="25" selection-end-line="210" selection-end-column="25" />
+            <state relative-caret-position="836">
+              <caret line="223" column="4" selection-start-line="223" selection-start-column="4" selection-end-line="223" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -536,12 +533,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1479192755980</updated>
-      <workItem from="1479192757164" duration="54430000" />
+      <workItem from="1479192757164" duration="54685000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54430000" />
+    <option name="totallyTimeSpent" value="54685000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="390" y="23" width="2068" height="1413" extended-state="0" />
@@ -861,8 +858,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/index.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="210" column="25" selection-start-line="210" selection-start-column="25" selection-end-line="210" selection-end-column="25" />
+        <state relative-caret-position="836">
+          <caret line="223" column="4" selection-start-line="223" selection-start-column="4" selection-end-line="223" selection-end-column="4" />
           <folding />
         </state>
       </provider>
