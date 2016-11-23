@@ -5,6 +5,8 @@ const counter = require('./utils/pageCounter');
 const getQueryParam = require('./utils/getQueryParam');
 const replaceQueryParam = require('./utils/replaceQueryParam');
 
+const uniq = require('lodash.uniq');
+
 const delay = (() => {
 	var timer = 0;
 	return function (callback, ms) {
@@ -20,6 +22,7 @@ class SearchBox extends Component {
 		this.state = {
 			hits: [],
 			ac: [],
+			acInput: '',
 			currentPage: 1,
 			searchVal: q ? q : ''
 		};
@@ -88,7 +91,12 @@ class SearchBox extends Component {
 	}
 
 	performQuery(value, page = 1) {
-		eFetch(value)
+		let val = value;
+		val = val.replace(":", "");
+		val = val.replace(",", "");
+		val = val.replace(".", "");
+
+		eFetch(val)
 			.then(data => {
 					try {
 						this.updateLocation(value, page);
@@ -106,13 +114,12 @@ class SearchBox extends Component {
 	}
 
 	render() {
+
 		const {searchVal, hits, currentPage, ac, acInput} = this.state;
 
 		const acArr = ac.map(item => {
-			return item._source.text_field.filter(item => {
-				return item.toLocaleString().toLowerCase().startsWith(acInput.toLocaleString().toLowerCase())
-			})
-		}).reduce( (previousValue, currentValue) => `${previousValue},${currentValue}`, '').split(',');
+			return item._source.text_field.filter(item => item)
+		}).reduce((previousValue, currentValue) => `${previousValue},${currentValue}`, '').split(',').filter(item => item);
 
 		const pages = (hits, currentPage, hitsPerPage = 10) => {
 			const max = Math.ceil(hits.length / hitsPerPage);
@@ -148,9 +155,18 @@ class SearchBox extends Component {
 					t('form', {
 							onSubmit: (e) => (e.preventDefault())
 						},
-						t('input', {
+						searchVal && t('input', {
 							ref: 'inputfield',
 							value: searchVal,
+							type: 'text',
+							onKeypress: e => {
+								if (e.charCode === 13) {
+									this.performQuery(e.target.value);
+								}
+							}
+						}),
+						!searchVal && t('input', {
+							ref: 'inputfield',
 							placeHolder: placeHolder,
 							type: 'text',
 							onKeypress: e => {
@@ -179,11 +195,23 @@ class SearchBox extends Component {
 						t('form', {
 								onSubmit: (e) => (e.preventDefault())
 							},
-							t('input', {
+							searchVal && t('input', {
+								ref: 'inputfield',
+								type: 'text',
+								value: searchVal,
+								onKeypress: e => {
+									if (e.charCode === 13) {
+										this.performQuery(e.target.value);
+									}
+								},
+								onKeyUp: e => delay(() => {
+									this.performAcQuery(e.target.value);
+								}, 400)
+							}),
+							!searchVal && t('input', {
 								ref: 'inputfield',
 								placeHolder: placeHolder,
 								type: 'text',
-								value: searchVal,
 								onKeypress: e => {
 									if (e.charCode === 13) {
 										this.performQuery(e.target.value);
@@ -203,8 +231,9 @@ class SearchBox extends Component {
 								}
 							)
 						),
+
 						ac.length > 0 && t('ul', {class: 'suggest'},
-							acArr.map(item => t('li', {class: 'item'}, item))
+							uniq(acArr).map(item => t('li', {class: 'item', onClick: () => this.performQuery(item)}, item))
 						)
 					)
 				)

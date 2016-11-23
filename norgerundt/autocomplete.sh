@@ -22,6 +22,6 @@ python -c "$PYTHON"
 # 3. use the output file from step 2 in the curl command
 curl -XPOST $ES_HOST/norgerundt_autocomplete/type/_bulk --data-binary @$JSON_FILE_OUT > /dev/null
 
-rm $JSON_FILE_OUT
+#rm $JSON_FILE_OUT
 rm $JSON_FILE_IN
 
