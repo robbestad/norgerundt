@@ -20,9 +20,6 @@ with open('norgerundt.csv') as fp:
         line = line.decode('ISO8859').encode('utf-8')
         line = line.replace("(mellomstikk)","")
         line = line.replace("'","\'")
-        line = line.replace(":","")
-        line = line.replace(".","")
-        line = line.replace(",","")
         line = line.replace("\"","")
         split = line.split(";")
         if i > 0:

@@ -91,7 +91,12 @@ class SearchBox extends Component {
 	}
 
 	performQuery(value, page = 1) {
-		eFetch(value)
+		let val = value;
+		val = val.replace(":", "");
+		val = val.replace(",", "");
+		val = val.replace(".", "");
+
+		eFetch(val)
 			.then(data => {
 					try {
 						this.updateLocation(value, page);
