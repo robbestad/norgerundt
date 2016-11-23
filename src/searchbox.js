@@ -141,9 +141,18 @@ class SearchBox extends Component {
 					t('form', {
 							onSubmit: (e) => (e.preventDefault())
 						},
-						t('input', {
+						searchVal && t('input', {
 							ref: 'inputfield',
 							value: searchVal,
+							type: 'text',
+							onKeypress: e => {
+								if (e.charCode === 13) {
+									this.performQuery(e.target.value);
+								}
+							}
+						}),
+						!searchVal && t('input', {
+							ref: 'inputfield',
 							placeHolder: placeHolder,
 							type: 'text',
 							onKeypress: e => {
@@ -172,11 +181,23 @@ class SearchBox extends Component {
 						t('form', {
 								onSubmit: (e) => (e.preventDefault())
 							},
-							t('input', {
+							searchVal && t('input', {
+								ref: 'inputfield',
+								type: 'text',
+								value: searchVal,
+								onKeypress: e => {
+									if (e.charCode === 13) {
+										this.performQuery(e.target.value);
+									}
+								},
+								onKeyUp: e => delay(() => {
+									this.performAcQuery(e.target.value);
+								}, 400)
+							}),
+							!searchVal && t('input', {
 								ref: 'inputfield',
 								placeHolder: placeHolder,
 								type: 'text',
-								value: searchVal,
 								onKeypress: e => {
 									if (e.charCode === 13) {
 										this.performQuery(e.target.value);
