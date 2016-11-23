@@ -5,6 +5,7 @@ python transform.py
 ES_HOST=localhost:9200
 JSON_FILE_IN=data.json
 JSON_FILE_OUT=bulk.json
+JSON_FILE_T=ins.json
 
 # 1. Python code to transform your JSON file
 PYTHON="import json,sys;
@@ -20,8 +21,8 @@ with open('$JSON_FILE_IN') as json_in:
 python -c "$PYTHON"
 
 # 3. use the output file from step 2 in the curl command
-curl -s -XPOST $ES_HOST/norgerundt/type/_bulk --data-binary @$JSON_FILE_OUT > /dev/null
+curl -s -XPOST $ES_HOST/norgerundt/type/_bulk --data-binary @$JSON_FILE_T > /dev/null
 
-rm $JSON_FILE_OUT
+#rm $JSON_FILE_OUT
 rm $JSON_FILE_IN
 

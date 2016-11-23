@@ -41,6 +41,10 @@ echo "Indexing data..."
 echo "Indexing groups..."
 sh transform.sh
 
+
+
+
+
 #curl -XPUT 'localhost:9200/norgerundt-titler?pretty' -d'
 #{
 #    "mappings": {
@@ -76,18 +80,20 @@ sh transform.sh
 #    }
 #}'
 
-curl -XPOST 'localhost:9200/norgerundt/_suggest?pretty&pretty' -d'
-{
-    "song-suggest" : {
-        "prefix" : "osl",
-        "completion" : {
-            "field" : "suggest",
-            "fuzzy" : {
-                "fuzziness" : 2
-            }
-        }
-    }
-}'
+
+
+#curl -XPOST 'localhost:9200/norgerundt/_suggest?pretty&pretty' -d'
+#{
+#    "song-suggest" : {
+#        "prefix" : "osl",
+#        "completion" : {
+#            "field" : "suggest",
+#            "fuzzy" : {
+#                "fuzziness" : 2
+#            }
+#        }
+#    }
+#}'
 
 
 #sh insert_norgerundt.sh > /dev/null
