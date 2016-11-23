@@ -23,7 +23,7 @@ with open('norgerundt.csv') as fp:
         line = line.replace("\"","")
         split = line.split(";")
         if i > 0:
-            data += '{ "item": ["' + split[3] + '"] } '
+            data += '{ "item": "' + str(i) + '", "text_field": ["' + split[3] + '"] } '
             if i+1 < num_lines:
                 data += ",\n"
 data += "]\n"

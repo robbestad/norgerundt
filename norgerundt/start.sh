@@ -38,10 +38,11 @@ echo "Done creating '$INDEX' index."
 
 echo
 echo "Indexing data..."
-
-echo "Indexing groups..."
 sh transform.sh
 
+
+echo
+echo "Mapping autocomplete..."
 
 curl -s -XDELETE "$ADDRESS/$ACINDEX" > /dev/null
 
@@ -87,6 +88,9 @@ curl -XPUT $ADDRESS/$ACINDEX/item/1?pretty -d'{
    ]
 }'
 
+echo
+echo "Indexing autocomplete..."
+sh autocomplete.sh
 
 #curl -XPUT 'localhost:9200/norgerundt-titler?pretty' -d'
 #{

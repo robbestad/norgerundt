@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="980e1376-e1da-477d-b852-44ca55fd604b" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/norgerundt/ac.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/norgerundt/acbulk.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/norgerundt/data.json" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/svenjs" afterPath="$PROJECT_DIR$/svenjs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/norgerundt/ac.json" afterPath="$PROJECT_DIR$/norgerundt/ac.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/norgerundt/acbulk.json" afterPath="$PROJECT_DIR$/norgerundt/acbulk.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/norgerundt/autocomplete.py" afterPath="$PROJECT_DIR$/norgerundt/autocomplete.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/norgerundt/autocomplete.sh" afterPath="$PROJECT_DIR$/norgerundt/autocomplete.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/norgerundt/start.sh" afterPath="$PROJECT_DIR$/norgerundt/start.sh" />
     </list>
     <ignored path="norgerundt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,8 +65,8 @@
       <file leaf-file-name="start.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/norgerundt/start.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="3" column="32" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="32" />
+            <state relative-caret-position="1055">
+              <caret line="92" column="18" selection-start-line="92" selection-start-column="18" selection-end-line="92" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -80,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="autocomplete.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="autocomplete.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/norgerundt/autocomplete.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state relative-caret-position="567">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -110,11 +112,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="autocomplete.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="autocomplete.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/norgerundt/autocomplete.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+            <state relative-caret-position="525">
+              <caret line="25" column="62" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -171,10 +173,10 @@
         <option value="$PROJECT_DIR$/src/render.js" />
         <option value="$PROJECT_DIR$/assets/index.css" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/norgerundt/start.sh" />
         <option value="$PROJECT_DIR$/norgerundt/transform.sh" />
-        <option value="$PROJECT_DIR$/norgerundt/autocomplete.py" />
+        <option value="$PROJECT_DIR$/norgerundt/start.sh" />
         <option value="$PROJECT_DIR$/norgerundt/autocomplete.sh" />
+        <option value="$PROJECT_DIR$/norgerundt/autocomplete.py" />
       </list>
     </option>
   </component>
@@ -693,12 +695,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1479192755980</updated>
-      <workItem from="1479192757164" duration="52551000" />
+      <workItem from="1479192757164" duration="52689000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52551000" />
+    <option name="totallyTimeSpent" value="52689000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="390" y="23" width="2068" height="1413" extended-state="0" />
@@ -989,14 +991,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/norgerundt/start.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/norgerundt/transform.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
@@ -1013,18 +1007,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/norgerundt/autocomplete.py">
+    <entry file="file://$PROJECT_DIR$/norgerundt/start.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        <state relative-caret-position="1055">
+          <caret line="92" column="18" selection-start-line="92" selection-start-column="18" selection-end-line="92" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/norgerundt/autocomplete.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state relative-caret-position="567">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/norgerundt/autocomplete.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="25" column="62" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="62" />
           <folding />
         </state>
       </provider>
