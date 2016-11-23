@@ -215,6 +215,11 @@ ul.suggest li {
 	font-size: 14px;
 }
 
+ul.suggest li.item:hover {
+	background: rgba(57, 85, 122, 0.5);
+	border: 1px solid white;
+}
+
 @media screen and (max-width: 768px) {
 	.header-left {
 		padding-top: 5px;
