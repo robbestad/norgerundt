@@ -1,4 +1,4 @@
-const Hapi = require('hapi');
+	const Hapi = require('hapi');
 const path = require('path');
 const Inert = require('inert');
 const curl = require('curlrequest');

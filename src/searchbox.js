@@ -112,19 +112,9 @@ class SearchBox extends Component {
 
 		const {searchVal, hits, currentPage, ac, acInput} = this.state;
 
-		// const acArr = ac.map(item => {
-		// 	return item._source.text_field.filter(item => {
-		// 		return item.toLocaleString().toLowerCase().startsWith(acInput.toLocaleString().toLowerCase())
-		// 	})
-		// }).reduce( (previousValue, currentValue) => `${previousValue},${currentValue}`, '').split(',').filter(item => item);
-
 		const acArr = ac.map(item => {
 			return item._source.text_field.filter(item => item)
 		}).reduce((previousValue, currentValue) => `${previousValue},${currentValue}`, '').split(',').filter(item => item);
-
-		console.log('acArr', acArr);
-		console.log('acArr', uniq(acArr));
-
 
 		const pages = (hits, currentPage, hitsPerPage = 10) => {
 			const max = Math.ceil(hits.length / hitsPerPage);
@@ -238,7 +228,7 @@ class SearchBox extends Component {
 						),
 
 						ac.length > 0 && t('ul', {class: 'suggest'},
-							uniq(acArr).map(item => t('li', {class: 'item'}, item))
+							uniq(acArr).map(item => t('li', {class: 'item', onClick: () => this.performQuery(item)}, item))
 						)
 					)
 				)
