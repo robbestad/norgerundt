@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 ADDRESS=$1
 INDEX="norgerundt"
+ACINDEX="norgerundt_autocomplete"
 
 if [ -z $ADDRESS ]; then
   ADDRESS="localhost:9200"
@@ -42,7 +43,49 @@ echo "Indexing groups..."
 sh transform.sh
 
 
+curl -s -XDELETE "$ADDRESS/$ACINDEX" > /dev/null
 
+curl -XPUT $ADDRESS/$ACINDEX -d'{
+   "settings": {
+      "analysis": {
+         "filter": {
+            "edge_ngram_filter": {
+               "type": "edge_ngram",
+               "min_gram": 2,
+               "max_gram": 20
+            }
+         },
+         "analyzer": {
+            "edge_ngram_analyzer": {
+               "type": "custom",
+               "tokenizer": "standard",
+               "filter": [
+                  "lowercase",
+                  "edge_ngram_filter"
+               ]
+            }
+         }
+      }
+   },
+   "mappings": {
+      "item": {
+         "properties": {
+            "text_field": {
+               "type": "text",
+               "analyzer": "edge_ngram_analyzer",
+               "search_analyzer": "standard"
+            }
+         }
+      }
+   }
+}'
+
+curl -XPUT $ADDRESS/$ACINDEX/item/1?pretty -d'{
+   "text_field": [
+      "cat dog",
+      "elephant"
+   ]
+}'
 
 
 #curl -XPUT 'localhost:9200/norgerundt-titler?pretty' -d'
