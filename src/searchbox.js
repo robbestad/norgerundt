@@ -77,6 +77,7 @@ class SearchBox extends Component {
 					// })
 					try {
 						this.setState({
+							acInput: value,
 							ac: data.hits.hits
 						})
 					} catch (e) {
@@ -105,7 +106,13 @@ class SearchBox extends Component {
 	}
 
 	render() {
-		const {searchVal, hits, currentPage, ac} = this.state;
+		const {searchVal, hits, currentPage, ac, acInput} = this.state;
+
+		const acArr = ac.map(item => {
+			return item._source.text_field.filter(item => {
+				return item.toLocaleString().toLowerCase().startsWith(acInput.toLocaleString().toLowerCase())
+			})
+		}).reduce( (previousValue, currentValue) => `${previousValue},${currentValue}`, '').split(',');
 
 		const pages = (hits, currentPage, hitsPerPage = 10) => {
 			const max = Math.ceil(hits.length / hitsPerPage);
@@ -197,7 +204,7 @@ class SearchBox extends Component {
 							)
 						),
 						ac.length > 0 && t('ul', {class: 'suggest'},
-							ac.map(item => t('li', {class: 'item'}, item._source.text_field[0]))
+							acArr.map(item => t('li', {class: 'item'}, item))
 						)
 					)
 				)

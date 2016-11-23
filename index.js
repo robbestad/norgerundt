@@ -74,7 +74,7 @@ const getAc = (input) => {
 	request = new Request('http://localhost:9200/norgerundt_autocomplete/_search', {
 		method: 'POST',
 		body: JSON.stringify({
-			size: 5,
+			size: 50,
 			query: {
 				query_string: {
 					query: input,
