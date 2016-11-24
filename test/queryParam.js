@@ -11,6 +11,11 @@ describe('getQueryParam', function() {
 			const location = {href: '/?q=asker&hits=10'};
 			assert.equal('asker', getQueryParam('q', location));
 		});
+		it('should return "oslo" when location has special chars', function() {
+			const location = {href: 'http://localhost:1995/?q=oslo:%20Avisbudenes%20dag&page=1'};
+
+			assert.equal('oslo: Avisbudenes dag', getQueryParam('q', location));
+		});
 		it('should return "asker" when location is in between other query strings', function() {
 			const location = {href: '/?q=asker&hits=10'};
 			assert.equal('asker', getQueryParam('q', location));

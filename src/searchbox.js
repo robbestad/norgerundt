@@ -4,7 +4,7 @@ const eFetch = require('./eFetch');
 const counter = require('./utils/pageCounter');
 const getQueryParam = require('./utils/getQueryParam');
 const replaceQueryParam = require('./utils/replaceQueryParam');
-const updateLocation = require('./utils/updateWindowLocation');
+const updateWindowLocation = require('./utils/updateWindowLocation').updateWindowLocation;
 
 const delay = (() => {
 	var timer = 0;
@@ -36,7 +36,7 @@ class SearchBox extends Component {
 			currentPage: page
 		});
 		const currentQuery = getQueryParam('q', window.location);
-		updateLocation(currentQuery, page);
+		updateWindowLocation(currentQuery, page, window.location);
 	}
 
 
@@ -109,7 +109,7 @@ class SearchBox extends Component {
 						if (this.refs.inputfield) this.refs.inputfield.value = value;
 						if (this.refs.inputfieldhead) this.refs.inputfieldhead.value = value;
 
-						updateLocation(value, page);
+						updateWindowLocation(value, page, window.location);
 						this.setState({
 							currentPage: page,
 							searchVal: value,

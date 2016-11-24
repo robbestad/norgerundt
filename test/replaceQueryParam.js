@@ -15,8 +15,8 @@ describe('replaceQueryParam', function () {
 			assert.equal('/?page=5&q=oslo', replaceQueryParam('q', 'oslo', location));
 		});
 		it('should return query with norwegian characters', function () {
-			const location = {href: '/?page=5&q=oslo&test=query'};
-			assert.equal('/?page=5&q=søster&test=query', replaceQueryParam('q', 'søster', location));
+			const location = {href: 'http://localhost:1995/?page=5&q=oslo&test=query'};
+			assert.equal('http://localhost:1995/?page=5&q=søster&test=query', replaceQueryParam('q', 'søster', location));
 		});
 	});
 });

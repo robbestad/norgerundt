@@ -12,10 +12,11 @@ module.exports = function replaceQueryParams(param, value, location) {
 				case "page":
 					return locationHref.replace(/page=(\d*)/, `${param}=${value}`);
 				case "q":
-					return locationHref.replace(/q=([a-zA-ZæøåÆØÅ]*)/, `${param}=${value}`);
+					if (locationHref.match(/q=\w.*?($|&)/)[1] === "&") {
+						return locationHref.replace(/q=\w.*?($|&)/, `${param}=${value}&`);
+					}
+					return locationHref.replace(/q=\w.*?($|&)/, `${param}=${value}`);
 			}
-			// const re = new RegExp("/" + param + "=(\d*)/");
-			// return locationHref.replace(re, `${param}=${value}`);
 		}
 	}
 };
