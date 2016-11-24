@@ -4,8 +4,7 @@ const eFetch = require('./eFetch');
 const counter = require('./utils/pageCounter');
 const getQueryParam = require('./utils/getQueryParam');
 const replaceQueryParam = require('./utils/replaceQueryParam');
-
-// const uniq = require('lodash.uniq');
+const updateLocation = require('./utils/updateWindowLocation');
 
 const delay = (() => {
 	var timer = 0;
@@ -30,7 +29,6 @@ class SearchBox extends Component {
 		this.updateStart = this.updateStart.bind(this);
 		this.performQuery = this.performQuery.bind(this);
 		this.putState = this.putState.bind(this);
-		this.updateLocation = this.updateLocation.bind(this);
 	}
 
 	updateStart(page) {
@@ -38,20 +36,9 @@ class SearchBox extends Component {
 			currentPage: page
 		});
 		const currentQuery = getQueryParam('q', window.location);
-		this.updateLocation(currentQuery, page);
+		updateLocation(currentQuery, page);
 	}
 
-	updateLocation(query, page) {
-		let hrefLocation = replaceQueryParam('q', query, location);
-		hrefLocation = replaceQueryParam('page', page, {href: hrefLocation});
-		if (history.pushState) {
-			history.pushState(null, null, hrefLocation);
-		}
-		else {
-			location.href = hrefLocation;
-		}
-		window.scrollTo(0, 0);
-	}
 
 	componentDidMount() {
 		const currentPage = getQueryParam('page', window.location);
@@ -100,7 +87,7 @@ class SearchBox extends Component {
 		eFetch(val)
 			.then(data => {
 					try {
-						this.updateLocation(value, page);
+						updateLocation(value, page);
 						this.setState({
 							currentPage: page,
 							searchVal: value,
