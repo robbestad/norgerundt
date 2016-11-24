@@ -110,26 +110,26 @@ a:hover {
 	padding: 40px 0 0 0;
 }
 
-/*input[type="text"] {*/
-/*font-size: 18px;*/
-/*border-radius: 1px;*/
-/*border: 1px solid rgba(57, 85, 122, 0.5);*/
-/*padding: 6px;*/
-/*margin: 5px 5px 0 10px;*/
-/*max-width: 70%;*/
-/*min-width: 150px;*/
-/*}*/
-/**/
-/*input[type="button"] {*/
-/*font-size: 18px;*/
-/*border-radius: 1px;*/
-/*border: 1px solid rgba(57, 85, 122, 0.5);*/
-/*padding: 6px;*/
-/*margin: 5px 0 0 0;*/
-/*max-width: 30%;*/
-/*min-width: 60px;*/
-/*background-color: white;*/
-/*}*/
+input[type="text"].header {
+	font-size: 18px;
+	border-radius: 1px;
+	border: 1px solid rgba(57, 85, 122, 0.5);
+	padding: 6px;
+	margin: 5px 5px 0 10px;
+	max-width: 70%;
+	min-width: 150px;
+}
+
+input[type="button"].header {
+	font-size: 18px;
+	border-radius: 1px;
+	border: 1px solid rgba(57, 85, 122, 0.5);
+	padding: 6px;
+	margin: 5px 0 0 0;
+	max-width: 30%;
+	min-width: 60px;
+	background-color: white;
+}
 
 .form-center input {
 	box-shadow: none;

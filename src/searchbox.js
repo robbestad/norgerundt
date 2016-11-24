@@ -164,6 +164,7 @@ class SearchBox extends Component {
 						},
 						searchVal && t('input', {
 							ref: 'inputfield',
+							class: 'header',
 							value: searchVal,
 							type: 'text',
 							onKeypress: e => {
@@ -185,6 +186,7 @@ class SearchBox extends Component {
 						t('input',
 							{
 								type: 'button',
+								class: 'header',
 								value: 'Søk',
 								onClick: e => {
 									this.performQuery(this.refs.inputfield.value);
