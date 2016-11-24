@@ -49,7 +49,7 @@ class SearchBox extends Component {
 		if (q) {
 			this.performQuery(q, currentPage);
 		}
-		if(this.refs.inputfield) this.refs.inputfield.focus();
+		if (this.refs.inputfield) this.refs.inputfield.focus();
 	}
 
 	putState(key, value) {
@@ -88,7 +88,7 @@ class SearchBox extends Component {
 			.then(data => {
 					try {
 						// if(!this.state.searchVal)
-							updateLocation(value, page);
+						updateLocation(value, page);
 						this.setState({
 							currentPage: page,
 							searchVal: value,
@@ -194,51 +194,12 @@ class SearchBox extends Component {
 							},
 							t('div', {class: 'bi-input'},
 								t('input', {class: 'prediction', ref: 'predictionField', value: prediction}),
-								// searchVal && t('input', {
-								// 	ref: 'inputfield',
-								// 	type: 'text',
-								// 	class: 'suggest',
-								// 	value: searchVal,
-								// 	onKeyDown: e => {
-								// 		if (e.keyCode === 8) {
-								// 			this.refs.predictionField.value = '';
-								// 			this.setState({
-								// 				acIndex: 0,
-								// 				acInput: '',
-								// 				searchVal: '',
-								// 				ac: []
-								// 			});
-								// 		}
-                                //
-								// 		if (e.keyCode === 40) {
-								// 			this.setState({
-								// 				acIndex: ++this.state.acIndex
-								// 			});
-								// 			e.preventDefault();
-								// 		}
-								// 		if (e.keyCode === 38) {
-								// 			this.setState({
-								// 				acIndex: acIndex > 0 ? --this.state.acIndex : 0
-								// 			});
-								// 			e.preventDefault();
-								// 		}
-								// 	},
-								// 	onKeypress: e => {
-								// 		if (e.charCode === 13) {
-								// 			this.performQuery(e.target.value);
-								// 		}
-								// 	},
-								// 	onKeyUp: e => delay(() => {
-								// 		this.performAcQuery(e.target.value);
-								// 	}, 400)
-								// }),
 								!searchVal && t('input', {
 									ref: 'inputfield',
 									placeHolder: placeHolder,
 									class: 'suggest',
 									type: 'text',
 									onKeyDown: e => {
-										console.log(e.keyCode);
 										if (e.keyCode === 8) {
 											this.refs.predictionField.value = '';
 											this.setState({
@@ -249,10 +210,9 @@ class SearchBox extends Component {
 											});
 										}
 
-
 										if (e.keyCode === 39) {
 											//høyre
-											if(prediction) {
+											if (prediction) {
 												this.refs.inputfield.value = prediction;
 											}
 											e.preventDefault();
