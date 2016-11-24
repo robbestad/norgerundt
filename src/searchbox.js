@@ -192,23 +192,33 @@ class SearchBox extends Component {
 								onSubmit: (e) => (e.preventDefault())
 							},
 							t('div', {class: 'bi-input'},
-								t('input', {class: 'prediction', value: prediction}),
+								t('input', {class: 'prediction', ref: 'predictionField', value: prediction}),
 								searchVal && t('input', {
 									ref: 'inputfield',
 									type: 'text',
 									class: 'suggest',
 									value: searchVal,
 									onKeyDown: e => {
-										if (e.KeyCode === 40) {
+										if (e.keyCode === 8) {
+											this.refs.predictionField.value = '';
+											this.setState({
+												acIndex: 0,
+												acInput: '',
+												searchVal: '',
+												ac: []
+											});
+										}
+
+										if (e.keyCode === 40) {
 											this.setState({
 												acIndex: ++this.state.acIndex
-											})
+											});
 											e.preventDefault();
 										}
-										if (e.KeyCode === 38) {
+										if (e.keyCode === 38) {
 											this.setState({
-												acIndex: --this.state.acIndex
-											})
+												acIndex: acIndex > 0 ? --this.state.acIndex : 0
+											});
 											e.preventDefault();
 										}
 									},
@@ -228,9 +238,22 @@ class SearchBox extends Component {
 									type: 'text',
 									onKeyDown: e => {
 										console.log(e.keyCode);
+										if (e.keyCode === 8) {
+											this.refs.predictionField.value = '';
+											this.setState({
+												acIndex: 0,
+												acInput: '',
+												searchVal: '',
+												ac: []
+											});
+										}
+
+
 										if (e.keyCode === 39) {
 											//høyre
-											this.refs.inputfield.value = prediction;
+											if(prediction) {
+												this.refs.inputfield.value = prediction;
+											}
 											e.preventDefault();
 										}
 
