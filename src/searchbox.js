@@ -74,6 +74,8 @@ class SearchBox extends Component {
 	}
 
 	performAcQuery(value) {
+
+
 		eFetch(value, '/ac')
 			.then(data => {
 					try {
@@ -89,6 +91,8 @@ class SearchBox extends Component {
 	}
 
 	performQuery(value, page = 1) {
+		if (!val) return;
+
 		let val = value;
 		val = val.replace(":", "");
 		val = val.replace(",", "");
@@ -123,6 +127,9 @@ class SearchBox extends Component {
 				return item.match(regex);
 			});
 
+		let prediction = ac.length > 0 ? 'undefined' !== typeof acArr[0] ? acArr[0] : '' : '';
+		prediction = `${acInput}${prediction.substr(acInput.length, prediction.length - acInput.length)}`;
+
 		const pages = (hits, currentPage, hitsPerPage = 10) => {
 			const max = Math.ceil(hits.length / hitsPerPage);
 			let out = [];
@@ -132,7 +139,6 @@ class SearchBox extends Component {
 				out.push(t('li', null,
 					(i + 1 !== Number(currentPage)) && t('a', {
 						href: hrefLocation
-						// onClick: () => this.updateStart(i + 1)
 					}, i + 1),
 					(i + 1 === Number(currentPage)) && t('a', {
 						class: 'nolink'
@@ -197,74 +203,91 @@ class SearchBox extends Component {
 						t('form', {
 								onSubmit: (e) => (e.preventDefault())
 							},
-							searchVal && t('input', {
-								ref: 'inputfield',
-								type: 'text',
-								value: searchVal,
-								onKeyDown: e => {
-									if(e.KeyCode === 40){
+							t('div', {class: 'bi-input'},
+								t('input', {class: 'prediction', value: prediction}),
+								searchVal && t('input', {
+									ref: 'inputfield',
+									type: 'text',
+									class: 'suggest',
+									value: searchVal,
+									onKeyDown: e => {
+										if (e.KeyCode === 40) {
+											this.setState({
+												acIndex: ++this.state.acIndex
+											})
+										}
+										if (e.KeyCode === 38) {
+											this.setState({
+												acIndex: --this.state.acIndex
+											})
+										}
+									},
+									onKeypress: e => {
+										if (e.charCode === 13) {
+											this.performQuery(e.target.value);
+										}
+									},
+									onKeyUp: e => delay(() => {
+										this.performAcQuery(e.target.value);
+									}, 400)
+								}),
+								!searchVal && t('input', {
+									ref: 'inputfield',
+									placeHolder: placeHolder,
+									class: 'suggest',
+									type: 'text',
+									onKeyDown: e => {
+										if (e.keyCode === 40) {
+											//høyre
+											this.setState({
+												acInput: prediction,
+												searchVal: prediction
+											})
+										}
+
+										if (e.keyCode === 40) {
+											this.setState({
+												acIndex: this.state.acIndex++
+											})
+										}
+										if (e.keyCode === 38) {
+											this.setState({
+												acIndex: this.state.acIndex--
+											})
+										}
+									},
+									onKeyPress: e => {
 										this.setState({
-											acIndex: ++this.state.acIndex
-										})
+											acInput: '',
+											ac: []
+										});
+										if (e.charCode === 13) {
+											this.performQuery(e.target.value);
+										}
+									},
+									onKeyUp: e => delay(() => {
+										this.performAcQuery(e.target.value);
+									}, 400)
+								}),
+								t('input',
+									{
+										type: 'button',
+										value: 'Søk',
+										class: 'hidden',
+										onClick: e => {
+											this.performQuery(this.refs.inputfield.value);
+										}
 									}
-									if(e.KeyCode === 38){
-										this.setState({
-											acIndex: --this.state.acIndex
-										})
-									}
-								},
-								onKeypress: e => {
-									if (e.charCode === 13) {
-										this.performQuery(e.target.value);
-									}
-								},
-								onKeyUp: e => delay(() => {
-									this.performAcQuery(e.target.value);
-								}, 400)
-							}),
-							!searchVal && t('input', {
-								ref: 'inputfield',
-								placeHolder: placeHolder,
-								type: 'text',
-								onKeyDown: e => {
-									if(e.KeyCode === 40){
-										this.setState({
-											acIndex: this.state.acIndex++
-										})
-									}
-									if(e.KeyCode === 38){
-										this.setState({
-											acIndex: this.state.acIndex--
-										})
-									}
-								},
-								onKeyPress: e => {
-									if (e.charCode === 13) {
-										this.performQuery(e.target.value);
-									}
-								},
-								onKeyUp: e => delay(() => {
-									this.performAcQuery(e.target.value);
-								}, 400)
-							}),
-							t('input',
-								{
-									type: 'button',
-									value: 'Søk',
-									onClick: e => {
-										this.performQuery(this.refs.inputfield.value);
-									}
-								}
-							)
+								))
 						),
 
-						ac.length > 0 && t('ul', {class: 'suggest'},
-							acArr.map((item, i) => t('li', {
-									class: `item ${acIndex === i ? 'active' : ''}`,
-									onClick: () => this.performQuery(item)
-								},
-								`${item} ${acIndex} ${i}`))
-						)
+						// ac.length > 0 && t('ul', {class: 'suggest'},
+						// 	acArr.map((item, i) => t('li', {
+						// 			class: `item ${acIndex === i ? 'active' : ''}`,
+						// 			onClick: () => this.performQuery(item)
+						// 		},
+						// 		`${item} ${acIndex} ${i}`))
+						// )
 					)
 				)
 			),
