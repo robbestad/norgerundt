@@ -4,7 +4,7 @@ module.exports = function getQueryParam(param, location) {
 
 	const paddedParam = `${param}=`;
 	const q = locationHref.substr(locationHref.indexOf(paddedParam));
-	console.log('q', q);
+	// console.log('q', q);
 
 	const value = q.split(paddedParam);
 	let result = value[1];
