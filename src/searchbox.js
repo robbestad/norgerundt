@@ -42,15 +42,32 @@ class SearchBox extends Component {
 
 	componentDidMount() {
 		const currentPage = getQueryParam('page', window.location);
+		this.refs.predictionField.value = '';
 
 		const q = getQueryParam('q', window.location);
 		this.putState('currentPage', currentPage);
 		this.putState('searchVal', q);
 		if (q) {
-			this.refs.inputfield.value = q;
 			this.performQuery(q, currentPage);
 		}
-		if (this.refs.inputfield) this.refs.inputfield.focus();
+		setTimeout(e => {
+			if (q && 'undefined' !== typeof q) {
+				if (this.refs.inputfield) this.refs.inputfield.value = q;
+				if (this.refs.inputfieldhead) this.refs.inputfieldhead.value = q;
+			}
+			if (this.refs.inputfield) this.refs.inputfield.focus();
+			if (this.refs.inputfieldhead) this.refs.inputfieldhead.focus();
+		}, 200)
+	}
+
+	componentDidUpdate(){
+		const q = getQueryParam('q', window.location);
+		setTimeout(e => {
+			if (q && 'undefined' !== typeof q) {
+				if (this.refs.inputfield) this.refs.inputfield.value = q;
+				if (this.refs.inputfieldhead) this.refs.inputfieldhead.value = q;
+			}
+		}, 200)
 	}
 
 
@@ -89,8 +106,8 @@ class SearchBox extends Component {
 		eFetch(val)
 			.then(data => {
 					try {
-						// if(!this.state.searchVal)
-						this.refs.inputfield.value = value;
+						if (this.refs.inputfield) this.refs.inputfield.value = value;
+						if (this.refs.inputfieldhead) this.refs.inputfieldhead.value = value;
 
 						updateLocation(value, page);
 						this.setState({
@@ -139,8 +156,8 @@ class SearchBox extends Component {
 			return out
 		};
 
-		const placeHolderItems = ['Vinter', 'Oslo', 'Hatt', 'Akvarium'];
-		const placeHolder = placeHolderItems[Math.floor(Math.random() * placeHolderItems.length)];
+		// const placeHolderItems = ['Vinter', 'Oslo', 'Hatt', 'Akvarium'];
+		// const placeHolder = placeHolderItems[Math.floor(Math.random() * placeHolderItems.length)];
 
 		const {startCount, endCount} = counter(currentPage);
 		return t('div', null,
@@ -155,9 +172,9 @@ class SearchBox extends Component {
 							onSubmit: (e) => (e.preventDefault())
 						},
 						searchVal && t('input', {
-							ref: 'inputfield',
+							ref: 'inputfieldhead',
 							class: 'header',
-							value: searchVal,
+							// value: searchVal,
 							type: 'text',
 							onKeypress: e => {
 								if (e.charCode === 13) {
@@ -166,8 +183,8 @@ class SearchBox extends Component {
 							}
 						}),
 						!searchVal && t('input', {
-							ref: 'inputfield',
-							placeHolder: placeHolder,
+							ref: 'inputfieldhead',
+							// placeHolder: placeHolder,
 							type: 'text',
 							onKeypress: e => {
 								if (e.charCode === 13) {
@@ -200,7 +217,7 @@ class SearchBox extends Component {
 								t('input', {class: 'prediction', ref: 'predictionField', value: prediction}),
 								t('input', {
 									ref: 'inputfield',
-									placeHolder: placeHolder,
+									// placeHolder: placeHolder,
 									class: 'suggest',
 									type: 'text',
 									onKeyDown: e => {
@@ -218,7 +235,8 @@ class SearchBox extends Component {
 										if (e.keyCode === 39) {
 											//høyre
 											if (prediction) {
-												this.refs.inputfield.value = prediction;
+												if (this.refs.inputfield) this.refs.inputfield.value = prediction;
+												if (this.refs.inputfieldhead) this.refs.inputfieldhead.value = prediction;
 											}
 											e.preventDefault();
 										}
