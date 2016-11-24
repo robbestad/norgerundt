@@ -91,8 +91,7 @@ class SearchBox extends Component {
 	}
 
 	performQuery(value, page = 1) {
-		if (!val) return;
-
+		if (!value) return;
 		let val = value;
 		val = val.replace(":", "");
 		val = val.replace(",", "");
@@ -215,11 +214,13 @@ class SearchBox extends Component {
 											this.setState({
 												acIndex: ++this.state.acIndex
 											})
+											e.preventDefault();
 										}
 										if (e.KeyCode === 38) {
 											this.setState({
 												acIndex: --this.state.acIndex
 											})
+											e.preventDefault();
 										}
 									},
 									onKeypress: e => {
@@ -237,32 +238,34 @@ class SearchBox extends Component {
 									class: 'suggest',
 									type: 'text',
 									onKeyDown: e => {
-										if (e.keyCode === 40) {
+										console.log(e.keyCode);
+										if (e.keyCode === 39) {
 											//høyre
-											this.setState({
-												acInput: prediction,
-												searchVal: prediction
-											})
+											this.refs.inputfield.value = prediction;
+											e.preventDefault();
 										}
 
 										if (e.keyCode === 40) {
 											this.setState({
 												acIndex: this.state.acIndex++
-											})
+											});
+											e.preventDefault();
 										}
 										if (e.keyCode === 38) {
 											this.setState({
 												acIndex: this.state.acIndex--
-											})
+											});
+											e.preventDefault();
 										}
 									},
 									onKeyPress: e => {
-										this.setState({
-											acInput: '',
-											ac: []
-										});
 										if (e.charCode === 13) {
 											this.performQuery(e.target.value);
+										} else {
+											this.setState({
+												acInput: '',
+												ac: []
+											});
 										}
 									},
 									onKeyUp: e => delay(() => {
