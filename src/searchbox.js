@@ -47,10 +47,12 @@ class SearchBox extends Component {
 		this.putState('currentPage', currentPage);
 		this.putState('searchVal', q);
 		if (q) {
+			this.refs.inputfield.value = q;
 			this.performQuery(q, currentPage);
 		}
 		if (this.refs.inputfield) this.refs.inputfield.focus();
 	}
+
 
 	putState(key, value) {
 		if (value) {
@@ -88,6 +90,8 @@ class SearchBox extends Component {
 			.then(data => {
 					try {
 						// if(!this.state.searchVal)
+						this.refs.inputfield.value = value;
+
 						updateLocation(value, page);
 						this.setState({
 							currentPage: page,
@@ -194,7 +198,7 @@ class SearchBox extends Component {
 							},
 							t('div', {class: 'bi-input'},
 								t('input', {class: 'prediction', ref: 'predictionField', value: prediction}),
-								!searchVal && t('input', {
+								t('input', {
 									ref: 'inputfield',
 									placeHolder: placeHolder,
 									class: 'suggest',
@@ -209,6 +213,7 @@ class SearchBox extends Component {
 												ac: []
 											});
 										}
+
 
 										if (e.keyCode === 39) {
 											//høyre
