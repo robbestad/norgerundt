@@ -70,6 +70,11 @@ const getData = (input) => {
 };
 
 const getAc = (input) => {
+	let val = input;
+	val = val.replace(':', '\\:');
+	val = val.replace('.', '\\.');
+	val = val.replace(',', '\\,');
+
 	let request;
 	request = new Request('http://localhost:9200/norgerundt_autocomplete/_search', {
 		method: 'POST',
@@ -77,7 +82,7 @@ const getAc = (input) => {
 			size: 5,
 			query: {
 				query_string: {
-					query: input,
+					query: `${val}*`,
 					default_operator: "AND"
 				}
 			}

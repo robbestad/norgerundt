@@ -5,7 +5,7 @@ const counter = require('./utils/pageCounter');
 const getQueryParam = require('./utils/getQueryParam');
 const replaceQueryParam = require('./utils/replaceQueryParam');
 
-const uniq = require('lodash.uniq');
+// const uniq = require('lodash.uniq');
 
 const delay = (() => {
 	var timer = 0;
@@ -24,6 +24,7 @@ class SearchBox extends Component {
 			ac: [],
 			acInput: '',
 			currentPage: 1,
+			acIndex: -1,
 			searchVal: q ? q : ''
 		};
 		this.updateStart = this.updateStart.bind(this);
@@ -75,9 +76,6 @@ class SearchBox extends Component {
 	performAcQuery(value) {
 		eFetch(value, '/ac')
 			.then(data => {
-					// data.hits.hits.forEach(item => {
-					// 	console.log(item._source.text_field[0]);
-					// })
 					try {
 						this.setState({
 							acInput: value,
@@ -115,11 +113,15 @@ class SearchBox extends Component {
 
 	render() {
 
-		const {searchVal, hits, currentPage, ac, acInput} = this.state;
+		const {searchVal, hits, currentPage, ac, acInput, acIndex} = this.state;
 
 		const acArr = ac.map(item => {
 			return item._source.text_field.filter(item => item)
-		}).reduce((previousValue, currentValue) => `${previousValue},${currentValue}`, '').split(',').filter(item => item);
+		}).reduce((previousValue, currentValue) => `${previousValue},${currentValue}`, '').split(',')
+			.filter(item => {
+				const regex = new RegExp('^' + acInput, 'i');
+				return item.match(regex);
+			});
 
 		const pages = (hits, currentPage, hitsPerPage = 10) => {
 			const max = Math.ceil(hits.length / hitsPerPage);
@@ -199,6 +201,18 @@ class SearchBox extends Component {
 								ref: 'inputfield',
 								type: 'text',
 								value: searchVal,
+								onKeyDown: e => {
+									if(e.KeyCode === 40){
+										this.setState({
+											acIndex: ++this.state.acIndex
+										})
+									}
+									if(e.KeyCode === 38){
+										this.setState({
+											acIndex: --this.state.acIndex
+										})
+									}
+								},
 								onKeypress: e => {
 									if (e.charCode === 13) {
 										this.performQuery(e.target.value);
@@ -212,7 +226,19 @@ class SearchBox extends Component {
 								ref: 'inputfield',
 								placeHolder: placeHolder,
 								type: 'text',
-								onKeypress: e => {
+								onKeyDown: e => {
+									if(e.KeyCode === 40){
+										this.setState({
+											acIndex: this.state.acIndex++
+										})
+									}
+									if(e.KeyCode === 38){
+										this.setState({
+											acIndex: this.state.acIndex--
+										})
+									}
+								},
+								onKeyPress: e => {
 									if (e.charCode === 13) {
 										this.performQuery(e.target.value);
 									}
@@ -233,7 +259,11 @@ class SearchBox extends Component {
 						),
 
 						ac.length > 0 && t('ul', {class: 'suggest'},
-							uniq(acArr).map(item => t('li', {class: 'item', onClick: () => this.performQuery(item)}, item))
+							acArr.map((item, i) => t('li', {
+									class: `item ${acIndex === i ? 'active' : ''}`,
+									onClick: () => this.performQuery(item)
+								},
+								`${item} ${acIndex} ${i}`))
 						)
 					)
 				)
