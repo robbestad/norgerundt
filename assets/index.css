@@ -286,11 +286,6 @@ ul.suggest li.active {
 		padding-top: 8px;
 	}
 
-	input[type="text"] {
-		width: 50%;
-		font-size: 14px;
-	}
-
 	input[type="button"] {
 		font-size: 14px;
 	}
