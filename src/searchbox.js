@@ -166,6 +166,12 @@ class SearchBox extends Component {
 			return out
 		};
 
+		setTimeout(e => {
+			this.refs.arrow.src = '/assets/arrowUp.png';
+			this.refs.arrow.classList.add('animated');
+			this.refs.arrow.classList.add('fadeIn');
+		}, 1000);
+
 		// const placeHolderItems = ['Vinter', 'Oslo', 'Hatt', 'Akvarium'];
 		// const placeHolder = placeHolderItems[Math.floor(Math.random() * placeHolderItems.length)];
 
@@ -224,6 +230,7 @@ class SearchBox extends Component {
 								onSubmit: (e) => (e.preventDefault())
 							},
 							t('div', {class: 'bi-input'},
+								t('img', {class: 'prediction-arrow', ref: 'arrow', src: '/assets/blank.png'}),
 								t('input', {class: 'prediction', ref: 'predictionField', value: prediction}),
 								t('input', {
 									ref: 'inputfield',
