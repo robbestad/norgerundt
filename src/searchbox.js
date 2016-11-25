@@ -6,6 +6,10 @@ const getQueryParam = require('./utils/getQueryParam');
 const replaceQueryParam = require('./utils/replaceQueryParam');
 const updateWindowLocation = require('./utils/updateWindowLocation').updateWindowLocation;
 
+const isMobile = () => {
+	return (window.innerWidth <= 800 && window.innerHeight <= 800);
+};
+
 const delay = (() => {
 	var timer = 0;
 	return function (callback, ms) {
@@ -60,7 +64,7 @@ class SearchBox extends Component {
 		}, 200)
 	}
 
-	componentDidUpdate(){
+	componentDidUpdate() {
 		const q = getQueryParam('q', window.location);
 		setTimeout(e => {
 			if (q && 'undefined' !== typeof q) {
@@ -80,20 +84,24 @@ class SearchBox extends Component {
 	}
 
 	performAcQuery(value) {
+		// only if not on mobile
+		console.log('isMobile', isMobile());
 
 
-		eFetch(value, '/ac')
-			.then(data => {
-					try {
-						this.setState({
-							acInput: value,
-							ac: data.hits.hits
-						})
-					} catch (e) {
-						console.error(e)
+		if (!isMobile()) {
+			eFetch(value, '/ac')
+				.then(data => {
+						try {
+							this.setState({
+								acInput: value,
+								ac: data.hits.hits
+							})
+						} catch (e) {
+							console.error(e)
+						}
 					}
-				}
-			)
+				)
+		}
 	}
 
 	performQuery(value, page = 1) {
@@ -230,7 +238,6 @@ class SearchBox extends Component {
 												ac: []
 											});
 										}
-
 
 										if (e.keyCode === 39) {
 											//høyre
