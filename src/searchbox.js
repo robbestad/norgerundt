@@ -44,6 +44,7 @@ class SearchBox extends Component {
 		this.updateStart = this.updateStart.bind(this);
 		this.performQuery = this.performQuery.bind(this);
 		this.putState = this.putState.bind(this);
+		this.cleanState = this.cleanState.bind(this);
 	}
 
 	updateStart(page) {
@@ -114,6 +115,16 @@ class SearchBox extends Component {
 					}
 				)
 		}
+	}
+
+	cleanState(){
+		this.setState({
+			acIndex: 0,
+			acInput: '',
+			searchVal: '',
+			ac: []
+		});
+		this.refs.predictionField.value = '';
 	}
 
 	performQuery(value, page = 1) {
@@ -247,18 +258,11 @@ class SearchBox extends Component {
 								t('input', {class: 'prediction', ref: 'predictionField', value: prediction}),
 								t('input', {
 									ref: 'inputfield',
-									// placeHolder: placeHolder,
 									class: 'suggest',
 									type: 'text',
 									onKeyDown: e => {
 										if (e.keyCode === 8) {
-											this.refs.predictionField.value = '';
-											this.setState({
-												acIndex: 0,
-												acInput: '',
-												searchVal: '',
-												ac: []
-											});
+											this.cleanState();
 										}
 
 										if (e.keyCode === 39) {
@@ -266,6 +270,7 @@ class SearchBox extends Component {
 											if (prediction) {
 												if (this.refs.inputfield) this.refs.inputfield.value = prediction;
 												if (this.refs.inputfieldhead) this.refs.inputfieldhead.value = prediction;
+												this.cleanState();
 											}
 											e.preventDefault();
 										}
@@ -277,11 +282,11 @@ class SearchBox extends Component {
 												acIndex: this.state.acIndex < acArr.length - 1 ? ++this.state.acIndex : acArr.length - 1
 											});
 
-											if (this.state.acIndex === acArr.length - 1) {
+											if (this.state.ac.length > 0 && this.state.acIndex === acArr.length - 1) {
 												addArrow(this.refs.arrow, 'arrowUp.png');
 											}
 
-											if (this.state.acIndex > 0 && this.state.acIndex < acArr.length - 1) {
+											if (this.state.ac.length > 0 && this.state.acIndex > 0 && this.state.acIndex < acArr.length - 1) {
 												addArrow(this.refs.arrow, 'arrowUpDown.png');
 											}
 
@@ -293,7 +298,7 @@ class SearchBox extends Component {
 												acIndex: this.state.acIndex > 0 ? --this.state.acIndex : 0
 											});
 
-											if (this.state.acIndex > 0 && this.state.acIndex < acArr.length - 1) {
+											if (this.state.ac.length > 0 && this.state.acIndex > 0 && this.state.acIndex < acArr.length - 1) {
 												addArrow(this.refs.arrow, 'arrowUpDown.png');
 											}
 
