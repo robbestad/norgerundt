@@ -375,8 +375,7 @@ class SearchBox extends Component {
 								hit._source.antall_menn && hit._source.antall_kvinner && t('span', null, `${menn} og ${kvinner}. `),
 								!hit._source.antall_kvinner && hit._source.antall_menn && t('span', null, `${menn}. `),
 								hit._source.alder && t('span', null, `Alder på personene i dette innslaget spenner fra ${hit._source.alder} år. `),
-								hit._source.antrekk && t('span', null, `Antrekk er ${antrekk}.`),
-								t('hr', null)
+								hit._source.antrekk && t('span', null, `Antrekk er ${antrekk}.`)
 							))
 					})
 				)
