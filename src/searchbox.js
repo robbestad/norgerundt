@@ -18,6 +18,17 @@ const delay = (() => {
 	};
 })();
 
+const addArrow = (ref, arrow = 'arrowUp.png', effect = 'fadeIn') => {
+	ref.src = '/assets/' + arrow;
+	// ref.classList.add('animated');
+	// ref.classList.add(effect);
+
+	setTimeout(e => {
+		// ref.classList.remove('animated');
+		// ref.classList.remove(effect);
+	}, 100);
+};
+
 class SearchBox extends Component {
 	constructor() {
 		super();
@@ -148,6 +159,13 @@ class SearchBox extends Component {
 		let prediction = ac.length > 0 ? 'undefined' !== typeof acArr[acIndex] ? acArr[acIndex] : '' : '';
 		prediction = `${acInput}${prediction.substr(acInput.length, prediction.length - acInput.length)}`;
 
+		if (prediction && acIndex === 0) {
+			addArrow(this.refs.arrow, 'arrowDown.png');
+		}
+		if(!prediction && this.refs.arrow){
+			addArrow(this.refs.arrow, 'blank.png');
+		}
+
 		const pages = (hits, currentPage, hitsPerPage = 10) => {
 			const max = Math.ceil(hits.length / hitsPerPage);
 			let out = [];
@@ -166,11 +184,6 @@ class SearchBox extends Component {
 			return out
 		};
 
-		setTimeout(e => {
-			this.refs.arrow.src = '/assets/arrowUp.png';
-			this.refs.arrow.classList.add('animated');
-			this.refs.arrow.classList.add('fadeIn');
-		}, 1000);
 
 		// const placeHolderItems = ['Vinter', 'Oslo', 'Hatt', 'Akvarium'];
 		// const placeHolder = placeHolderItems[Math.floor(Math.random() * placeHolderItems.length)];
@@ -258,16 +271,32 @@ class SearchBox extends Component {
 										}
 
 										if (e.keyCode === 40) {
+											e.preventDefault();
+
 											this.setState({
 												acIndex: this.state.acIndex < acArr.length - 1 ? ++this.state.acIndex : acArr.length - 1
 											});
-											e.preventDefault();
+
+											if (this.state.acIndex === acArr.length - 1) {
+												addArrow(this.refs.arrow, 'arrowUp.png');
+											}
+
+											if (this.state.acIndex > 0 && this.state.acIndex < acArr.length - 1) {
+												addArrow(this.refs.arrow, 'arrowUpDown.png');
+											}
+
 										}
 										if (e.keyCode === 38) {
-											this.setState({
-												acIndex: this.state.acIndex > 0 ? --this.state.acIndex: 0
-											});
 											e.preventDefault();
+
+											this.setState({
+												acIndex: this.state.acIndex > 0 ? --this.state.acIndex : 0
+											});
+
+											if (this.state.acIndex > 0 && this.state.acIndex < acArr.length - 1) {
+												addArrow(this.refs.arrow, 'arrowUpDown.png');
+											}
+
 										}
 									},
 									onKeyPress: e => {
@@ -281,7 +310,7 @@ class SearchBox extends Component {
 										}
 									},
 									onKeyUp: e => delay(() => {
-										if((e.keyCode > 64 && e.keyCode < 100  || (e.keyCode === 186 || e.keyCode === 219|| e.keyCode === 222))) {
+										if ((e.keyCode > 64 && e.keyCode < 100 || (e.keyCode === 186 || e.keyCode === 219 || e.keyCode === 222))) {
 											console.log('getting AC because key is ', e.keyCode);
 											this.performAcQuery(e.target.value);
 										}
