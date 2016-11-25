@@ -170,7 +170,7 @@ class SearchBox extends Component {
 		let prediction = ac.length > 0 ? 'undefined' !== typeof acArr[acIndex] ? acArr[acIndex] : '' : '';
 		prediction = `${acInput}${prediction.substr(acInput.length, prediction.length - acInput.length)}`;
 
-		if (prediction && acIndex === 0) {
+		if (prediction && acIndex === 0 && ac.length > 1) {
 			addArrow(this.refs.arrow, 'arrowDown.png');
 		}
 		if(!prediction && this.refs.arrow){
