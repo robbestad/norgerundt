@@ -94,6 +94,7 @@ class SearchBox extends Component {
 						try {
 							this.setState({
 								acInput: value,
+								acIndex: 0,
 								ac: data.hits.hits
 							})
 						} catch (e) {
@@ -142,8 +143,9 @@ class SearchBox extends Component {
 				const regex = new RegExp('^' + acInput, 'i');
 				return item.match(regex);
 			});
+		console.log('acIndex', acIndex);
 
-		let prediction = ac.length > 0 ? 'undefined' !== typeof acArr[0] ? acArr[0] : '' : '';
+		let prediction = ac.length > 0 ? 'undefined' !== typeof acArr[acIndex] ? acArr[acIndex] : '' : '';
 		prediction = `${acInput}${prediction.substr(acInput.length, prediction.length - acInput.length)}`;
 
 		const pages = (hits, currentPage, hitsPerPage = 10) => {
@@ -250,13 +252,13 @@ class SearchBox extends Component {
 
 										if (e.keyCode === 40) {
 											this.setState({
-												acIndex: this.state.acIndex++
+												acIndex: this.state.acIndex < acArr.length - 1 ? ++this.state.acIndex : acArr.length - 1
 											});
 											e.preventDefault();
 										}
 										if (e.keyCode === 38) {
 											this.setState({
-												acIndex: this.state.acIndex--
+												acIndex: this.state.acIndex > 0 ? --this.state.acIndex: 0
 											});
 											e.preventDefault();
 										}
@@ -272,7 +274,10 @@ class SearchBox extends Component {
 										}
 									},
 									onKeyUp: e => delay(() => {
-										this.performAcQuery(e.target.value);
+										if((e.keyCode > 64 && e.keyCode < 100  || (e.keyCode === 186 || e.keyCode === 219|| e.keyCode === 222))) {
+											console.log('getting AC because key is ', e.keyCode);
+											this.performAcQuery(e.target.value);
+										}
 									}, 400)
 								}),
 								t('input',
