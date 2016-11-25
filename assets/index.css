@@ -6,7 +6,8 @@ body {
 	-webkit-font-smoothing: antialiased;
 	font-weight: 300;
 	font-family: 'Droid Sans', sans-serif;
-	font-size: 18px;
+	/*font-family: 'Sorts Mill Goudy', serif;*/
+	font-size: 16px;
 	display: flex;
 	flex-direction: column;
 	margin: 0;
@@ -91,7 +92,7 @@ a:visited, a:active, a:hover {
 
 h1 {
 	font-family: 'Sorts Mill Goudy', serif;
-	font-size: 26px;
+	font-size: calc(14px * 2.5);
 }
 
 h3 {
@@ -152,6 +153,11 @@ ul#hits li {
 	background: white;
 	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
 	box-sizing: border-box;
+}
+
+ul#hits li a:nth-child(1) {
+	font-family: 'Sorts Mill Goudy', serif;
+	font-size: 20px;
 }
 
 hr {
