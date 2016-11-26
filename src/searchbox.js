@@ -133,7 +133,6 @@ class SearchBox extends Component {
 		val = val.replace(":", "");
 		val = val.replace(",", "");
 		val = val.replace(".", "");
-
 		eFetch(val)
 			.then(data => {
 					try {
@@ -194,7 +193,6 @@ class SearchBox extends Component {
 			}
 			return out
 		};
-
 
 		// const placeHolderItems = ['Vinter', 'Oslo', 'Hatt', 'Akvarium'];
 		// const placeHolder = placeHolderItems[Math.floor(Math.random() * placeHolderItems.length)];
@@ -261,11 +259,11 @@ class SearchBox extends Component {
 									class: 'suggest',
 									type: 'text',
 									onKeyDown: e => {
-										if (e.keyCode === 8) {
+										if (e.keyCode === 8 || e.which === 8) {
 											this.cleanState();
 										}
 
-										if (e.keyCode === 39) {
+										if (e.keyCode === 39 || e.which === 39) {
 											//høyre
 											if (prediction) {
 												if (this.refs.inputfield) this.refs.inputfield.value = prediction;
@@ -274,7 +272,7 @@ class SearchBox extends Component {
 											}
 										}
 
-										if (e.keyCode === 40) {
+										if (e.keyCode === 40 || e.which === 40) {
 											e.preventDefault();
 
 											this.setState({
@@ -290,7 +288,7 @@ class SearchBox extends Component {
 											}
 
 										}
-										if (e.keyCode === 38) {
+										if (e.keyCode === 38 || e.which === 38) {
 											e.preventDefault();
 
 											this.setState({
@@ -304,7 +302,8 @@ class SearchBox extends Component {
 										}
 									},
 									onKeyPress: e => {
-										if (e.charCode === 13) {
+										if (e.charCode === 13 || e.which === 13) {
+											console.log(e.target.value)
 											this.performQuery(e.target.value);
 										} else {
 											this.setState({
