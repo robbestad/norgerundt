@@ -80,8 +80,8 @@ class SearchBox extends Component {
 		const q = getQueryParam('q', window.location);
 		setTimeout(e => {
 			if (q && 'undefined' !== typeof q) {
-				if (this.refs.inputfield) this.refs.inputfield.value = q;
-				if (this.refs.inputfieldhead) this.refs.inputfieldhead.value = q;
+				// if (this.refs.inputfield) this.refs.inputfield.value = q;
+				// if (this.refs.inputfieldhead) this.refs.inputfieldhead.value = q;
 			}
 		}, 200)
 	}
@@ -272,11 +272,10 @@ class SearchBox extends Component {
 												if (this.refs.inputfieldhead) this.refs.inputfieldhead.value = prediction;
 												this.cleanState();
 											}
-											e.preventDefault();
 										}
 
 										if (e.keyCode === 40) {
-											e.preventDefault();
+											// e.preventDefault();
 
 											this.setState({
 												acIndex: this.state.acIndex < acArr.length - 1 ? ++this.state.acIndex : acArr.length - 1
@@ -292,7 +291,7 @@ class SearchBox extends Component {
 
 										}
 										if (e.keyCode === 38) {
-											e.preventDefault();
+											// e.preventDefault();
 
 											this.setState({
 												acIndex: this.state.acIndex > 0 ? --this.state.acIndex : 0
