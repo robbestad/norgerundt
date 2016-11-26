@@ -275,7 +275,7 @@ class SearchBox extends Component {
 										}
 
 										if (e.keyCode === 40) {
-											// e.preventDefault();
+											e.preventDefault();
 
 											this.setState({
 												acIndex: this.state.acIndex < acArr.length - 1 ? ++this.state.acIndex : acArr.length - 1
@@ -291,7 +291,7 @@ class SearchBox extends Component {
 
 										}
 										if (e.keyCode === 38) {
-											// e.preventDefault();
+											e.preventDefault();
 
 											this.setState({
 												acIndex: this.state.acIndex > 0 ? --this.state.acIndex : 0
