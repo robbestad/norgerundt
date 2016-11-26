@@ -223,10 +223,15 @@ ul.suggest li.active {
 	border: 1px solid white;
 }
 
+.form-center{
+	width: 100%;
+	max-width: 400px;
+	min-width: 200px;
+}
+
 .bi-input {
 	position: relative;
 	width: auto;
-	min-width: 200px;
 }
 
 .hidden {
