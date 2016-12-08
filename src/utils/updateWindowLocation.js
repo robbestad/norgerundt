@@ -5,7 +5,6 @@ const getNewLocation = (query, page, location) => {
 	hrefLocation = replaceQueryParam('page', page, {href: hrefLocation});
 	const splitHttp = hrefLocation.split('/?');
 
-	console.log('split',splitHttp)
 	let l = hrefLocation;
 	if (splitHttp.length > 0) {
 		l = `?${splitHttp[1]}`;
