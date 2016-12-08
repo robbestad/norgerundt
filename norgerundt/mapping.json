@@ -60,9 +60,9 @@
 		"name": {
 		  "type": "string"
 		},
-		"created_on": {
+		"created": {
 		  "type": "date",
-		  "format": "yyyy-MM-dd"
+		  "format": "epoch_millis"
 		},
 		"tags": {
 		  "type": "string",

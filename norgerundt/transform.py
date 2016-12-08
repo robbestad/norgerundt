@@ -22,7 +22,8 @@ with open('norgerundt.csv') as fp:
         line = line.replace("\"","")
         split = line.split(";")
         if i > 0:
-            data += '{ "year": "' + split[0] + '", \
+            data += '{ "date": "' + split[0] + '-01-01", \
+"year": "' + split[0] + '", \
 "url":  "' + split[1] + '", \
 "kommune":  "' + split[2] + '", \
 "tittel":  "' + split[3] + '", \

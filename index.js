@@ -61,7 +61,8 @@ const getData = (input) => {
 		}),
 		headers: new Headers({
 			'Accept': 'application/json, text/plain, */*',
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			Authorization: `Basic ZWxhc3RpYzpjaGFuZ2VtZQ==`
 		})
 	});
 
@@ -89,7 +90,8 @@ const getAc = (input) => {
 		}),
 		headers: new Headers({
 			'Accept': 'application/json, text/plain, */*',
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			Authorization: `Basic ZWxhc3RpYzpjaGFuZ2VtZQ==`
 		})
 	});
 

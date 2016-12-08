@@ -99,7 +99,7 @@ if (process.env.NODE_ENV === 'production') {
 
 	config.output = {
 		path: path.join(__dirname, '..'),
-		filename: 'app.js'
+		filename: 'app.build.js'
 	};
 
 	config.module.loaders.push(
